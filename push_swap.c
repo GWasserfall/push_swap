@@ -41,19 +41,85 @@ t_stacks	*ft_containstacks(t_stack **a, t_stack **b)
 	if (!(container = (t_stacks *)malloc(sizeof(t_stacks))))
 		return NULL;
 	
-	container->a = *a;
-	container->b = *b;
+	container->a = a;
+	container->b = b;
 
 	return (container);
 }
 
+bool sorted(t_stack **stack, t_stack **helper)
+{
+	if ((*helper)->next)
+		return false;
+	t_stack *start = (*stack)->next;
+	while (start)
+	{
+		if (!start->next)
+			return true;
+		if (start->value < start->next->value)
+		{
+			start = start->next;
+			continue;
+		}
+		else
+			return false;		
+	}
+	return true;
+}
+
+
+void ft_sort(t_stacks **container)
+{
+	t_stacks *stacks = *container;
+	t_stack *a = *(stacks->a);
+	t_stack *b = *(stacks->b);
+
+	
+
+	while (!(sorted(&a, &b)))
+	{
+		t_stack *ca = a->next;
+		t_stack *cb = b->next;
+		
+		db_printstacks(&a, &b);
+		printf("Press Any Key to Continue\n");
+	
+		getchar();
+		//system("clear");
+
+		if (!cb) 
+		{
+			printf("Nothing on CB\n");
+			pb(&stacks);
+			continue;
+		}
+		if (ca->value > cb->value)
+			pb(&stacks);
+		else
+		{
+			pa(&stacks);
+			sa(&stacks);
+		}
+
+		if (!ca)
+		{
+			printf("sorted!");
+			break ;
+		}
+	}
+}
+
+
+
+
+
 
 int main(int argc, char **argv)
 {
-	t_stack *stack_a;
-	t_stack *stack_b;
-	t_stacks *container;
-	int		i;
+	t_stack		*stack_a;
+	t_stack		*stack_b;
+	t_stacks	*container;
+	int			i;
 
 	i = 1;
 
@@ -67,24 +133,18 @@ int main(int argc, char **argv)
 	}
 
 	container = ft_containstacks(&stack_a, &stack_b);
+	db_printstacks(&stack_a, &stack_b);
+	printf("Before sort\n");
+	ft_sort(&container);
+	
+	printf("\nAfter sort\n");
+	db_printstacks(&stack_a, &stack_b);
 
-	// Test actions.c
-	db_printstacks(&stack_a, &stack_b);
-	sa(&container);
-	db_printstacks(&stack_a, &stack_b);
-	sb(&container);
-	db_printstacks(&stack_a, &stack_b);
-	ss(&container);
-	db_printstacks(&stack_a, &stack_b);
-	pb(&container);
-	pb(&container);
-	pb(&container);
-	db_printstacks(&stack_a, &stack_b);
-	pa(&container);
-	db_printstacks(&stack_a, &stack_b);
 }
 
 
 
 
 
+
+ 

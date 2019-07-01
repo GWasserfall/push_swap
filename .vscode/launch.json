@@ -5,6 +5,19 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "(lldb) Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/push_swap",
+			"args": ["10", "9", "8", "7", "8"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"preLaunchTask": "build",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
+		},
+		{
 			"name": "gcc build and debug active file",
 			"type": "cppdbg",
 			"request": "launch",

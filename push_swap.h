@@ -15,11 +15,11 @@ typedef struct		s_stack
 	struct s_stack	*next;
 }					t_stack;
 
-typedef struct	s_stacks 
+typedef struct		s_stacks 
 {
-	t_stack 	*a;
-	t_stack 	*b;
-}				t_stacks;
+	t_stack 		**a;
+	t_stack 		**b;
+}					t_stacks;
 
 // actions_backend
 void	ft_swap(t_stack **stack);

@@ -4,7 +4,13 @@
 // 	 is only one or no elements).
 void sa(t_stacks **stacks)
 {
-	ft_swap(&(*stacks)->a);
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_swap(&a);
 	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : sa ~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
@@ -12,33 +18,55 @@ void sa(t_stacks **stacks)
 //      is only one or no elements).
 void sb(t_stacks **stacks)
 {
-	ft_swap(&(*stacks)->b);
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+	ft_swap(&b);
 	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : sb ~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 // ss : sa and sb at the same time.
 void ss(t_stacks **stacks)
 {
-	ft_swap(&(*stacks)->a);
-	ft_swap(&(*stacks)->b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : ss ~~~~~~~~~~~~~~~~~~~~~~~~");
+	t_stack *a;
+	t_stack *b;
 
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_swap(&a);
+	ft_swap(&b);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : ss ~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 // ***pa : push a - take the first element at the top of b and put it at the top of a. Do
 // 	       nothing if b is empty.
 void pa(t_stacks **stacks)
 {
-	ft_push(&(*stacks)->b, &(*stacks)->a);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : pa ~~~~~~~~~~~~~~~~~~~~~~~~");	
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_push(&b, &a);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : pa ~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 // pb : push b - take the first element at the top of a and put it at the top of b. Do
 // 	    nothing if a is empty.
 void pb(t_stacks **stacks)
 {
-	ft_push(&(*stacks)->a, &(*stacks)->b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : pb ~~~~~~~~~~~~~~~~~~~~~~~~");	
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_push(&a, &b);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : pb ~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 
@@ -46,24 +74,42 @@ void pb(t_stacks **stacks)
 // 	    the last one.
 void ra(t_stacks **stacks)
 {
-	ft_rotate(&(*stacks)->a);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : ra ~~~~~~~~~~~~~~~~~~~~~~~~");	
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_rotate(&a);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : ra ~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 // rb : rotate b - shift up all elements of stack b by 1. The first element becomes
 // 	    the last one.
 void rb(t_stacks **stacks)
 {
-	ft_rotate(&(*stacks)->b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rb ~~~~~~~~~~~~~~~~~~~~~~~~");	
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_rotate(&b);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rb ~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 // rr : ra and rb at the same time.
 void rr(t_stacks **stacks)
 {
-	ft_rotate(&(*stacks)->a);
-	ft_rotate(&(*stacks)->b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rr ~~~~~~~~~~~~~~~~~~~~~~~~");	
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_rotate(&a);
+	ft_rotate(&b);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rr ~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 
@@ -71,8 +117,14 @@ void rr(t_stacks **stacks)
 // becomes the first one.
 void rra(t_stacks **stacks)
 {
-	ft_reverse(&(*stacks)->a);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rra ~~~~~~~~~~~~~~~~~~~~~~~");	
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_reverse(&a);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rra ~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 
@@ -80,15 +132,27 @@ void rra(t_stacks **stacks)
 // 	  becomes the first one.
 void rrb(t_stacks **stacks)
 {
-	ft_reverse(&(*stacks)->b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rrb ~~~~~~~~~~~~~~~~~~~~~~~");	
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_reverse(&b);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rrb ~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 
 // rrr : rra and rrb at the same time.
 void rrr(t_stacks **stacks)
 {
-	ft_reverse(&(*stacks)->a);
-	ft_reverse(&(*stacks)->b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rrr ~~~~~~~~~~~~~~~~~~~~~~~");	
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	ft_reverse(&a);
+	ft_reverse(&b);
+	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rrr ~~~~~~~~~~~~~~~~~~~~~~~");
 }
