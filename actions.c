@@ -11,7 +11,8 @@ void sa(t_stacks **stacks)
 	b = *(*stacks)->b;
 
 	ft_swap(&a);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : sa ~~~~~~~~~~~~~~~~~~~~~~~~");
+
+	db_delayprint("pa", stacks);
 }
 
 // sb : swap b - swap the first 2 elements at the top of stack b. Do nothing if there
@@ -24,7 +25,8 @@ void sb(t_stacks **stacks)
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 	ft_swap(&b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : sb ~~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	db_delayprint("sb", stacks);
 }
 
 // ss : sa and sb at the same time.
@@ -38,7 +40,8 @@ void ss(t_stacks **stacks)
 
 	ft_swap(&a);
 	ft_swap(&b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : ss ~~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	db_delayprint("ss", stacks);
 }
 
 // ***pa : push a - take the first element at the top of b and put it at the top of a. Do
@@ -52,7 +55,8 @@ void pa(t_stacks **stacks)
 	b = *(*stacks)->b;
 
 	ft_push(&b, &a);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : pa ~~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	db_delayprint("pa", stacks);
 }
 
 // pb : push b - take the first element at the top of a and put it at the top of b. Do
@@ -66,7 +70,8 @@ void pb(t_stacks **stacks)
 	b = *(*stacks)->b;
 
 	ft_push(&a, &b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : pb ~~~~~~~~~~~~~~~~~~~~~~~~");
+
+	db_delayprint("pb", stacks);
 }
 
 
@@ -81,7 +86,8 @@ void ra(t_stacks **stacks)
 	b = *(*stacks)->b;
 
 	ft_rotate(&a);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : ra ~~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	db_delayprint("ra", stacks);
 }
 
 // rb : rotate b - shift up all elements of stack b by 1. The first element becomes
@@ -95,7 +101,8 @@ void rb(t_stacks **stacks)
 	b = *(*stacks)->b;
 
 	ft_rotate(&b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rb ~~~~~~~~~~~~~~~~~~~~~~~~");
+
+	db_delayprint("rb", stacks);
 }
 
 // rr : ra and rb at the same time.
@@ -109,7 +116,8 @@ void rr(t_stacks **stacks)
 
 	ft_rotate(&a);
 	ft_rotate(&b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rr ~~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	db_delayprint("rr", stacks);
 }
 
 
@@ -124,7 +132,8 @@ void rra(t_stacks **stacks)
 	b = *(*stacks)->b;
 
 	ft_reverse(&a);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rra ~~~~~~~~~~~~~~~~~~~~~~~");
+
+	db_delayprint("rra", stacks);
 }
 
 
@@ -139,7 +148,8 @@ void rrb(t_stacks **stacks)
 	b = *(*stacks)->b;
 
 	ft_reverse(&b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rrb ~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	db_delayprint("rrb", stacks);
 }
 
 
@@ -154,5 +164,6 @@ void rrr(t_stacks **stacks)
 
 	ft_reverse(&a);
 	ft_reverse(&b);
-	printf("\n\n~~~~~~~~~~~~~~~~~~~~~~ EXEC : rrr ~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	db_delayprint("rrr", stacks);
 }

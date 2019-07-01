@@ -9,6 +9,8 @@
 #define HOR "\u2501"
 #define VER "\u2503"
 
+extern int acount;
+
 void db_reprint(char *str, int count)
 {
 	while (count)
@@ -87,4 +89,29 @@ void db_printstacks(t_stack **a, t_stack **b)
 		}
 	}
 	db_footer();
+}
+
+
+void db_delayprint(char *action_name, t_stacks **stacks)
+{
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*stacks)->a;
+	b = *(*stacks)->b;
+
+	acount++;
+
+	const char str1[] = "~~~~~~~~~~~~~~~~~~~~~~ EXEC : ";
+	const char str2[] = "~~~~~~~~~~~~~~~~~~~~~~~~\n";	
+
+
+	usleep(50000);
+	system("clear");
+	db_printstacks(&a, &b);
+
+	// write(1, str1, strlen(str1));
+	// write(1, action_name, strlen(action_name));
+	// write(1, str2, strlen(str2));
+	
 }

@@ -3,6 +3,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # define true	1
 # define false	0
 
@@ -37,7 +38,7 @@ void pb(t_stacks **stacks);
 
 // debug
 void				db_printstacks(t_stack **a, t_stack **b);
-
+void				db_delayprint(char *action_name, t_stacks **stacks);
 
 
 // stack
