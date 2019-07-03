@@ -1,5 +1,39 @@
 #include "push_swap.h"
 
+bool ft_sorted(t_stack **stack, t_stack **helper)
+{
+	if ((*helper)->next)
+		return false;
+	t_stack *start = (*stack)->next;
+	while (start)
+	{
+		if (!start->next)
+			return true;
+		if (start->value < start->next->value)
+		{
+			start = start->next;
+			continue;
+		}
+		else
+			return false;		
+	}
+	return true;
+}
+
+t_stacks	*ft_containstacks(t_stack **a, t_stack **b, bool is_checker)
+{
+	t_stacks *container;
+
+	if (!(container = (t_stacks *)malloc(sizeof(t_stacks))))
+		return NULL;
+	
+	container->a = a;
+	container->b = b;
+	container->is_checker = is_checker;
+
+	return (container);
+}
+
 t_stack	*ft_newelem(int value)
 {
 	t_stack *stack;

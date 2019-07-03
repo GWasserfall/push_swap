@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "libft/libft.h"
 # define true	1
 # define false	0
 
@@ -18,6 +19,7 @@ typedef struct		s_stack
 
 typedef struct		s_stacks 
 {
+	bool			is_checker;
 	t_stack 		**a;
 	t_stack 		**b;
 }					t_stacks;
@@ -34,16 +36,30 @@ void sb(t_stacks **stacks);
 void ss(t_stacks **stacks);
 void pa(t_stacks **stacks);
 void pb(t_stacks **stacks);
-
+void ra(t_stacks **stacks);
+void rb(t_stacks **stacks);
+void rr(t_stacks **stacks);
+void rra(t_stacks **stacks);
+void rrb(t_stacks **stacks);
+void rrr(t_stacks **stacks);
 
 // debug
 void				db_printstacks(t_stack **a, t_stack **b);
 void				db_delayprint(char *action_name, t_stacks **stacks);
 
-
 // stack
 bool				ft_appendelem(t_stack **stack, int value);
 t_stack				*ft_newelem(int value);
 t_stack				*ft_stackinit();
+bool				ft_sorted(t_stack **stack, t_stack **helper);
+
+// helpers
+bool				ft_hasdupe(t_stack **stack);
+
+// push_swap
+t_stacks			*ft_containstacks(t_stack **a, t_stack **b, bool is_checker);
+
+// alogos
+void				ft_kaksort(t_stacks **container);
 
 #endif

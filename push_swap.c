@@ -1,80 +1,7 @@
 #include "push_swap.h"
 
 int acount = 0;
-
-t_stacks	*ft_containstacks(t_stack **a, t_stack **b)
-{
-	t_stacks *container;
-
-	if (!(container = (t_stacks *)malloc(sizeof(t_stacks))))
-		return NULL;
-	
-	container->a = a;
-	container->b = b;
-
-	return (container);
-}
-
-bool sorted(t_stack **stack, t_stack **helper)
-{
-	if ((*helper)->next)
-		return false;
-	t_stack *start = (*stack)->next;
-	while (start)
-	{
-		if (!start->next)
-			return true;
-		if (start->value < start->next->value)
-		{
-			start = start->next;
-			continue;
-		}
-		else
-			return false;		
-	}
-	return true;
-}
-
-
-void ft_kaksort(t_stacks **container)
-{
-	t_stacks *stacks = *container;
-	t_stack *a = *(stacks->a);
-	t_stack *b = *(stacks->b);
-
-	while (!(sorted(&a, &b)))
-	{
-		t_stack *ca = a->next;
-		t_stack *cb = b->next;
-		
-		if (!ca)
-		{
-			// assume done
-			// push all of B to A
-			while (b->next)
-				pa(&stacks);
-			return ;
-		}
-
-		if (!cb) 
-		{
-			pb(&stacks);
-			continue;
-		}
-		if (ca->value > cb->value)
-			pb(&stacks);
-		else
-		{
-			pa(&stacks);
-			sa(&stacks);
-		}
-	}
-}
-
-
-
-
-
+bool debug = false;
 
 int main(int argc, char **argv)
 {
@@ -90,30 +17,43 @@ int main(int argc, char **argv)
 
 	if (argc > 1)
 	{
+		if (!(strcmp("-d", argv[i])))
+		{
+			debug = true;
+			i++;
+		}
 		while (i < argc)
 			ft_appendelem(&stack_a, atoi(argv[i++]));
 	}
-
-	container = ft_containstacks(&stack_a, &stack_b);
+	else
+	{
+		printf("error (no args)\n");
+	}
 	
-	system("clear");
-	db_printstacks(&stack_a, &stack_b);
-	printf("\nPress any key to start\n");
-	getchar();
 
+	container = ft_containstacks(&stack_a, &stack_b, false);
+	
+	if ((ft_hasdupe(&stack_a)))
+	{
+		printf("error (duplicates)\n");
+		return (1);
+	}
+
+	if (debug)
+	{
+		system("clear");
+		db_printstacks(&stack_a, &stack_b);
+		printf("\nPress any key to start\n");
+		getchar();
+	}
+
+	// Run algo here
 	ft_kaksort(&container);
 	
-	system("clear");
-	
-	db_printstacks(&stack_a, &stack_b);
-
-
-	printf("Done? Maybe...  [%d] actions performed\n\n", acount);
+	if (debug)
+	{
+		system("clear");
+		db_printstacks(&stack_a, &stack_b);
+		printf("Done? Maybe...  [%d] actions performed\n\n", acount);
+	}
 }
-
-
-
-
-
-
- 

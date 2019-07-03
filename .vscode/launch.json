@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/push_swap",
-			"args": ["10", "9", "8", "7", "8"],
+			"args": ["10", "10", "10", "10", "10"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"preLaunchTask": "build",
@@ -18,11 +18,11 @@
 			"MIMode": "lldb"
 		},
 		{
-			"name": "gcc build and debug active file",
+			"name": "gcc push_swap",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/push_swap",
-			"args": ["1", "2", "3", "4"],
+			"args": ["2", "2", "3", "4"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

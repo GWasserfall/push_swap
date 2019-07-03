@@ -10,6 +10,7 @@
 #define VER "\u2503"
 
 extern int acount;
+extern bool debug;
 
 void db_reprint(char *str, int count)
 {
@@ -50,6 +51,9 @@ void db_printstacks(t_stack **a, t_stack **b)
 	t_stack *cb;
 	int		ia;
 	int		ib;
+
+	if (!debug)
+		return ;
 
 	db_header();
 	
@@ -96,6 +100,9 @@ void db_delayprint(char *action_name, t_stacks **stacks)
 {
 	t_stack *a;
 	t_stack *b;
+
+	if (!debug)
+		return ;
 
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
