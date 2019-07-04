@@ -50,7 +50,6 @@ void ss(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
@@ -72,15 +71,14 @@ void pa(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
 	ft_push(&b, &a);
 
-	if (!debug)
-		printf("pa\n");
-	else
+	if (!is_checker)
+		ft_putstr("pa\n");
+	if (debug)
 		db_delayprint("pa", stacks);
 }
 
@@ -93,15 +91,14 @@ void pb(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
 	ft_push(&a, &b);
 
-	if (!debug)
-		printf("pb\n");
-	else
+	if (!is_checker)
+		ft_putstr("pb\n");
+	if (debug)
 		db_delayprint("pb", stacks);
 }
 
@@ -115,15 +112,14 @@ void ra(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
 	ft_rotate(&a);
 
-	if (!debug)
-		printf("ra\n");
-	else
+	if (!is_checker)
+		ft_putstr("ra\n");
+	if (debug)
 		db_delayprint("ra", stacks);
 }
 
@@ -136,15 +132,14 @@ void rb(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
 	ft_rotate(&b);
 
-	if (!debug)
-		printf("rb\n");
-	else
+	if (!is_checker)
+		ft_putstr("rb\n");
+	if (debug)
 		db_delayprint("rb", stacks);
 }
 
@@ -156,16 +151,15 @@ void rr(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
 	ft_rotate(&a);
 	ft_rotate(&b);
 	
-	if (!debug)
-		printf("rr\n");
-	else
+	if (!is_checker)
+		ft_putstr("rr\n");
+	if (debug)
 		db_delayprint("rr", stacks);
 }
 
@@ -179,15 +173,14 @@ void rra(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
 	ft_reverse(&a);
 
-	if (!debug)
-		printf("rra\n");
-	else
+	if (!is_checker)
+		ft_putstr("rra\n");
+	if (debug)
 		db_delayprint("rra", stacks);
 }
 
@@ -201,15 +194,14 @@ void rrb(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
 	ft_reverse(&b);
 	
-	if (!debug)
-		printf("rrb\n");
-	else
+	if (!is_checker)
+		ft_putstr("rrb\n");
+	if (debug)
 		db_delayprint("rrb", stacks);
 }
 
@@ -222,15 +214,14 @@ void rrr(t_stacks **stacks)
 	bool	is_checker;
 
 	is_checker = (*stacks)->is_checker;
-
 	a = *(*stacks)->a;
 	b = *(*stacks)->b;
 
 	ft_reverse(&a);
 	ft_reverse(&b);
 
-	if (!debug)
-		printf("rrr\n");
-	else
+	if (!is_checker)
+		ft_putstr("rrr\n");
+	if (debug)
 		db_delayprint("rrr", stacks);
 }

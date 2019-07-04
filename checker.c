@@ -1,6 +1,5 @@
 #include "push_swap.h"
 #include "libft/libft.h"
-#include "libft/get_next_line.h"
 
 int acount;
 bool debug = false;
@@ -34,6 +33,7 @@ void	ft_runactions(t_stacks **container)
 			rrb(container);
 		if (!(ft_strcmp(line, "rrr")))
 			rrr(container);
+		//printf("Got action : %s\n", line);
 	}
 }
 
@@ -63,8 +63,11 @@ int main(int argc, char **argv)
 	if (ft_sorted(&stack_a, &stack_b))
 		printf("OK\n");
 	else
-		printf("KO");
-	
+	{
+		debug = true;
+		printf("KO\n");
+		db_delayprint("DEBUG", &container);
+	}
 
 	return (0);
 }
