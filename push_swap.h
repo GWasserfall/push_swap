@@ -61,5 +61,13 @@ t_stacks			*ft_containstacks(t_stack **a, t_stack **b, bool is_checker);
 
 // alogos
 void				ft_kaksort(t_stacks **container);
+void				sort_three(t_stacks **container);
+void				ft_slowsort(t_stacks **container);
+
+int					get_value_at_index(t_stack **stack, int index);
+
+int					index_of(t_stack **stack, int number);
+int					stack_len(t_stack **stack);
+int					get_min(t_stack **stack);
 
 #endif

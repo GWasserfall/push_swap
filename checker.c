@@ -8,8 +8,10 @@ void	ft_runactions(t_stacks **container)
 {
 	char *line;
 
+	int ret;
+
 	line = ft_strnew(0);
-	while ((get_next_line(0, &line) > 0))
+	while ((ret = get_next_line(0, &line)) >= 0)
 	{
 		if (!(ft_strcmp(line, "sa")))
 			sa(container);
@@ -58,16 +60,41 @@ int main(int argc, char **argv)
 
 	container = ft_containstacks(&stack_a, &stack_b, true);
 
-	ft_runactions(&container);
+	// whiel((ret = get_net_line()))
+	// ft_runactions(&container);
 
 	if (ft_sorted(&stack_a, &stack_b))
 		printf("OK\n");
 	else
 	{
-		debug = true;
+		//debug = true;
 		printf("KO\n");
-		db_delayprint("DEBUG", &container);
+		//db_delayprint("DEBUG", &container);
 	}
 
 	return (0);
 }
+
+// int main(){
+// 	char **line;
+// 	*line = (char *) malloc(1000);
+// 	int ret;
+// 	int len;
+// 	int i;
+// 	// get_next_line(0,line);
+// 	while((ret= get_next_line(0,line)) > 0)
+// 	{
+// 		i = 0;
+// 		len = ft_strlen(*line);
+// 			// ft_putendl(*line);
+// 			while(len-(i)){
+// 				ft_putnbr((*line)[i]);
+// 				i++;
+// 			}
+// 			// printf("%s",*line);
+// 			// get_next_line(0,line);
+// 			// ft_putendl(*line);
+// 		// printf("%s",*line);
+// 	}
+// 	return(0);
+// }

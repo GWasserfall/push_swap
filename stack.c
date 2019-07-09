@@ -78,3 +78,53 @@ t_stack	*ft_stackinit()
 
 	return (stack);
 }
+
+int	get_min(t_stack **stack)
+{
+	int min;
+	t_stack *cursor;
+
+	cursor = (*stack)->next;
+
+	min = cursor->value;
+	while (cursor)
+	{
+		if (cursor-> value < min)
+			min = cursor-> value;
+		cursor = cursor->next;
+	}
+	return min;
+}
+
+int	stack_len(t_stack **stack)
+{
+	t_stack *cursor;
+	int i;
+
+	i = 0;
+	cursor = (*stack)->next;
+
+	while (cursor && i++)
+		cursor = cursor->next;
+	
+	return (i);
+}
+
+int index_of(t_stack **stack, int number)
+{
+	int index;
+
+	t_stack *cursor;
+
+	index = 0;
+	cursor = (*stack)->next;
+
+	while (cursor)
+	{
+		if (cursor->value == number)
+			return index;
+		index++;
+		cursor = cursor->next;
+	}
+	return (-1);
+}

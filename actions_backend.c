@@ -49,7 +49,6 @@ void ft_rotate(t_stack **stack)
 		first->prev = last;
 		first->next = NULL;
 
-
 	}
 }
 

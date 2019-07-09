@@ -48,8 +48,10 @@ int main(int argc, char **argv)
 	}
 
 	// Run algo here
-	ft_kaksort(&container);
-	
+	//sort_three(&container);
+	ft_slowsort(&container);
+	//ft_kaksort(&container);
+
 	if (debug)
 	{
 		system("clear");
