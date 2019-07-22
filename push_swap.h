@@ -4,7 +4,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include "libft.h"
 # define true	1
 # define false	0
 
@@ -12,6 +12,8 @@ typedef int bool;
 typedef struct		s_stack
 {
 	int 			value;
+	int				index;
+	int				group;
 	bool			master;
 	struct s_stack	*prev;
 	struct s_stack	*next;
@@ -67,7 +69,11 @@ void				ft_slowsort(t_stacks **container);
 int					get_value_at_index(t_stack **stack, int index);
 
 int					index_of(t_stack **stack, int number);
-int					stack_len(t_stack **stack);
+int					stack_len(t_stack *stack);
 int					get_min(t_stack **stack);
+
+// Sanatise Input 
+bool				input_sane(int argc, char **argv);
+
 
 #endif

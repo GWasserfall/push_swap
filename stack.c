@@ -43,6 +43,8 @@ t_stack	*ft_newelem(int value)
 	
 	stack->value = value;
 	stack->master = false;
+	stack->index = -1;
+	stack->group = -1;
 	stack->prev = NULL;
 	stack->next = NULL;
 	return (stack);
@@ -96,13 +98,13 @@ int	get_min(t_stack **stack)
 	return min;
 }
 
-int	stack_len(t_stack **stack)
+int	stack_len(t_stack *stack)
 {
 	t_stack *cursor;
 	int i;
 
 	i = 0;
-	cursor = (*stack)->next;
+	cursor = stack->next;
 
 	while (cursor && i++)
 		cursor = cursor->next;

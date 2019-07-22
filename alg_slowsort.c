@@ -12,7 +12,7 @@ void	ft_slowsort(t_stacks **container)
 
 	while (!(ft_sorted(&a, &b)))
 	{
-		stacklen = stack_len(&a);
+		stacklen = stack_len(a);
 		min = get_min(&a);
 
 		while (index_of(&a, min) != 0)
@@ -24,7 +24,7 @@ void	ft_slowsort(t_stacks **container)
 		}
 		
 		pb(container);
-		if (stack_len(&a) == 3)
+		if (stack_len(a) == 3)
 			sort_three(container);
 		if (!a->next)
 			while (b->next)

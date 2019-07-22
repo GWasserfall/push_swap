@@ -54,16 +54,15 @@ void ft_rotate(t_stack **stack)
 
 void ft_reverse(t_stack **stack)
 {
-	//rra : reverse rotate a - shift down all elements of stack a by 1. The flast element
-	//becomes the first one.
 	t_stack *master;
 	t_stack *first;
 	t_stack *last;
 
 	master = *stack;
 	first = master->next;
+	if (!first)
+		return ;
 	last = first->next;
-
 	if (first && last)
 	{
 		while (last->next)
@@ -82,8 +81,6 @@ void ft_reverse(t_stack **stack)
 
 void	ft_push(t_stack **sender, t_stack **receiver)
 {
-	// ***pa : push a - take the first element at the top of b and put it at the top of a. Do
-	//  nothing if b is empty.
 	t_stack *s_first;
 	t_stack *r_first;
 	
@@ -92,16 +89,11 @@ void	ft_push(t_stack **sender, t_stack **receiver)
 
 	if (!s_first)
 		return ;
-
-	// remove senders first item
 	(*sender)->next = s_first->next;
 	if ((*sender)->next)
 		(*sender)->next->prev = (*sender); 
-
-	// Put it ontop of receiver
 	(*receiver)->next = s_first;
 	s_first->prev = (*receiver);
-
 	if (!r_first)
 		s_first->next = NULL;
 	else
