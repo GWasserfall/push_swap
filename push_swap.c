@@ -65,15 +65,29 @@ void	group_nodes(t_stack *stacka, int group_count)
 	int stacklen;
 	int nodes_per_group;
 	t_stack *cursor;
+	int group = 1;
 
+	
 	stacklen = ft_stacklengths(stacka);
+	nodes_per_group = stacklen / group_count;
+	int index = 1;
+	int i = nodes_per_group;
+	if (stacklen % group > 0)
+		group_count++;
 
 	while (stacklen)
 	{
-
+		cursor = get_item_by_index(stacka, index);
+		cursor->group = group;
+		if (!nodes_per_group)
+		{
+			group++;
+			nodes_per_group = i;
+		}
+		nodes_per_group--;
+		index++;
 		stacklen--;
 	}
-
 }
 
 
@@ -123,15 +137,16 @@ int main(int argc, char **argv)
 		getchar();
 	}
 
-	// Run algo herep
+	// Run algo here
 	// sort_three(&container);
-	ft_slowsort(&container);
+	// ft_slowsort(&container);
+	 ft_gabbysort(&container, 5);
 	// ft_kaksort(&container);
 
 	t_stack *cursor = stack_a->next;
 	while (cursor)
 	{
-		printf("[%d] [%d] = %d\n", cursor->index, cursor->group, cursor->value);
+		printf("[%03d] [%d] = %d\n", cursor->index, cursor->group, cursor->value);
 		cursor = cursor->next;
 	}
 

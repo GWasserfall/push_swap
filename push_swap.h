@@ -65,6 +65,7 @@ t_stacks			*ft_containstacks(t_stack **a, t_stack **b, bool is_checker);
 void				ft_kaksort(t_stacks **container);
 void				sort_three(t_stacks **container);
 void				ft_slowsort(t_stacks **container);
+void				ft_gabbysort(t_stacks **container, int group);
 
 int					get_value_at_index(t_stack **stack, int index);
 
