@@ -25,7 +25,7 @@ void	ft_slowsort(t_stacks **container)
 		
 		pb(container);
 		if (stack_len(a) == 3)
-			sort_three(container);
+			ft_sort_three(container);
 		if (!a->next)
 			while (b->next)
 				pa(container);

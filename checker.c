@@ -39,6 +39,7 @@ void	ft_runactions(t_stacks **container)
 	line = ft_strnew(0);
 	while ((ret = get_next_line(0, &line)) >= 0)
 	{
+		printf("%d\n", ret);
 		if (!(ft_act(container, line)))
 		{
 			printf("Incorrect input :(\n");
@@ -68,16 +69,13 @@ int main(int argc, char **argv)
 
 	container = ft_containstacks(&stack_a, &stack_b, true);
 
-	// whiel((ret = get_net_line()))
 	ft_runactions(&container);
 
 	if (ft_sorted(&stack_a, &stack_b))
 		printf("OK\n");
 	else
 	{
-		//debug = true;
 		printf("KO\n");
-		//db_delayprint("DEBUG", &container);
 	}
 
 	return (0);

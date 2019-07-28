@@ -8,10 +8,9 @@ if len(argv) > 1:
 def args(count):
 	uni = set()
 
-	while len(uni) < count:
-		uni.add(randint(0, 200))
+	while len(uni) < int(count):
+		uni.add(randint(-100, 3000))
 
-	uni.shuffle()
 	return [str(x) for x in uni]
 
-print " ".join(args(100))
+print " ".join(args(argv[1]))

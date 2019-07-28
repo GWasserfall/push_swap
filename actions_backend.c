@@ -57,22 +57,36 @@ void ft_reverse(t_stack **stack)
 	t_stack *master;
 	t_stack *first;
 	t_stack *last;
+	t_stack *second_last;
+	
 
 	master = *stack;
+	
 	first = master->next;
 	if (!first)
 		return ;
 	last = first->next;
+	second_last = last;
 	if (first && last)
 	{
 		while (last->next)
 			last = last->next;
 
+		while (second_last->next->next)
+			second_last = second_last->next;
+
+
 		if (first->next == last)
-			return ft_swap(stack);
+		{
+			master->next = last;
+			first->next = last->next;
+			last->next = first;
+		}
+			// return ft_swap(stack);
 
 		master->next = last;
 		last->prev->next = NULL;
+		second_last->next = NULL;
 		last->prev = master;
 		last->next = first;
 		first->prev = last;
