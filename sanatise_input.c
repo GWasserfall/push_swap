@@ -1,5 +1,5 @@
 #include "libft.h"
-#include "push_swap.h"
+#include <push_swap.h>
 
 void    print_checker_usage()
 {

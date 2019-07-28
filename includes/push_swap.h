@@ -4,7 +4,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft.h"
+# include <libft.h>
 # define true	1
 # define false	0
 # define RED   "\x1B[31m"
@@ -108,6 +108,12 @@ int					get_min(t_stack **stack);
 
 long				ft_atol(char *string);
 
+bool ft_single_sorted(t_stack *head);
+void	ft_sort_below_thirty(t_stacks **container);
+
+
+int len_from_start(t_stack *head, t_stack *item);
+int len_to_end(t_stack *head, t_stack *item);
 
 // Sanatise Input 
 bool				input_sane(int argc, char **argv);

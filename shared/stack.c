@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include <push_swap.h>
 
 bool ft_sorted(t_stack **stack, t_stack **helper)
 {
@@ -18,6 +18,20 @@ bool ft_sorted(t_stack **stack, t_stack **helper)
 			return false;		
 	}
 	return true;
+}
+
+bool ft_single_sorted(t_stack *head)
+{
+	head = head->next;
+	while (head)
+	{
+		if (!head->next)
+			break ;
+		if (head->value > head->next->value)
+			return (false);
+		head = head->next;
+	}
+	return (true);
 }
 
 t_stacks	*ft_containstacks(t_stack **a, t_stack **b, bool is_checker)

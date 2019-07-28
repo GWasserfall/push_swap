@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include <push_swap.h>
 
 int get_value_at_index(t_stack **stack, int index)
 {
@@ -23,13 +23,13 @@ void ft_sort_three(t_stacks **container)
 {
     t_stacks *stacks = *container;
 	t_stack *a = *(stacks->a);
-	t_stack *b = *(stacks->b);
+	//t_stack *b = *(stacks->b);
 
     int one;
     int two;
     int thr;
 
-    while (!(ft_sorted(&a, &b)))
+    while (!(ft_single_sorted(a)))
     {
         one = get_value_at_index(&a, 0);
         two = get_value_at_index(&a, 1);

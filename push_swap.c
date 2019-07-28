@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include <push_swap.h>
 #include <limits.h>
 
 int acount = 0;
@@ -152,20 +152,14 @@ bool	args_are_digits(int argc, char **argv)
 	return (true);
 }
 
-// TODO create 2 functions here
 bool	preflight(int argc, char **argv)
 {
-	if (argc > 2)
+	if (argc > 1)
 	{
 		if (!(args_are_digits(argc, argv)))
 			return (false);
 		if (!(args_fit_int(argc, argv)))
 			return (false);
-	}
-	else
-	{
-		ft_putstr(RED "Error!" RESET "  (Insufficient arguments [min 2])\n");
-		return (false);
 	}
 	return (true);
 }
@@ -174,26 +168,39 @@ void	run_algorithm(int count, t_stacks **container)
 {
 	t_stacks *stacks = *container;
 	t_stack *a = *(stacks->a);
-	t_stack *b = *(stacks->b);
 
 	if (count == 2)
 		ft_sort_two(container);
 	else if (count == 3)
 		ft_sort_three(container);
-	else if (count == 4)
-		ft_sort_four(container);
-	else if (count == 5)
-		ft_sort_five(container);
-	else if (count < 70)
+	else if (count < 31)
+		ft_sort_below_thirty(container);
+	else if (count < 101)
 	{
 		group_nodes(a, 5);
 		ft_gabbysort(container);
 	}
 	else
 	{
-		group_nodes(a, 11);
+		group_nodes(a, 13);
 		ft_gabbysort(container);
 	}
+}
+
+void destroy_stack(t_stack *head)
+{
+	if (head->next)
+		destroy_stack(head->next);
+	free(head);
+}
+
+
+int cleanup(t_stacks *container)
+{
+	destroy_stack(*(container->a));
+	destroy_stack(*(container->b));
+	free(container);
+	return (0);
 }
 
 int main(int argc, char **argv)
@@ -210,12 +217,15 @@ int main(int argc, char **argv)
 	stack_b = ft_stackinit();
 	while (i < argc)
 		ft_appendelem(&stack_a, atoi(argv[i++]));
-	if ((ft_hasdupe(&stack_a))) 
+	if ((ft_hasdupe(&stack_a)))
 	{
 		ft_putstr(RED "Error!" RESET "  (Duplicates found)\n");
 		return print_usage(argv[0]);
 	}
 	normalise(stack_a, argc - 1);
 	container = ft_containstacks(&stack_a, &stack_b, false);
+	if (ft_sorted(&stack_a, &stack_b))
+		return (0);
 	run_algorithm(argc - 1, &container);
+	return (cleanup(container));
 }

@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include <push_swap.h>
 
 extern bool debug;
 
@@ -18,8 +18,8 @@ void sa(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("sa\n");
-	if (debug)
-		db_delayprint(a_sa, stacks);
+	// if (debug)
+	// 	db_delayprint(a_sa, stacks);
 }
 
 // sb : swap b - swap the first 2 elements at the top of stack b. Do nothing if there
@@ -38,8 +38,8 @@ void sb(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("sb\n");
-	if (debug)
-		db_delayprint(a_sb, stacks);
+	// if (debug)
+	// 	db_delayprint(a_sb, stacks);
 }
 
 // ss : sa and sb at the same time.
@@ -58,8 +58,8 @@ void ss(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("ss\n");
-	if (debug)
-		db_delayprint(a_ss, stacks);
+	// if (debug)
+	// 	db_delayprint(a_ss, stacks);
 }
 
 // ***pa : push a - take the first element at the top of b and put it at the top of a. Do
@@ -78,8 +78,8 @@ void pa(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("pa\n");
-	if (debug)
-		db_delayprint(a_pa, stacks);
+	// if (debug)
+	// 	db_delayprint(a_pa, stacks);
 }
 
 // pb : push b - take the first element at the top of a and put it at the top of b. Do
@@ -98,8 +98,8 @@ void pb(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("pb\n");
-	if (debug)
-		db_delayprint(a_pb, stacks);
+	// if (debug)
+	// 	db_delayprint(a_pb, stacks);
 }
 
 
@@ -119,8 +119,8 @@ void ra(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("ra\n");
-	if (debug)
-		db_delayprint(a_ra, stacks);
+	// if (debug)
+	// 	db_delayprint(a_ra, stacks);
 }
 
 // rb : rotate b - shift up all elements of stack b by 1. The first element becomes
@@ -139,8 +139,8 @@ void rb(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("rb\n");
-	if (debug)
-		db_delayprint(a_rb, stacks);
+	// if (debug)
+	// 	db_delayprint(a_rb, stacks);
 }
 
 // rr : ra and rb at the same time.
@@ -159,8 +159,8 @@ void rr(t_stacks **stacks)
 	
 	if (!is_checker)
 		ft_putstr("rr\n");
-	if (debug)
-		db_delayprint(a_rr, stacks);
+	// if (debug)
+	// 	db_delayprint(a_rr, stacks);
 }
 
 
@@ -180,8 +180,8 @@ void rra(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("rra\n");
-	if (debug)
-		db_delayprint(a_rra, stacks);
+	// if (debug)
+	// 	db_delayprint(a_rra, stacks);
 }
 
 
@@ -201,8 +201,8 @@ void rrb(t_stacks **stacks)
 	
 	if (!is_checker)
 		ft_putstr("rrb\n");
-	if (debug)
-		db_delayprint(a_rrb, stacks);
+	// if (debug)
+	// 	db_delayprint(a_rrb, stacks);
 }
 
 
@@ -222,6 +222,6 @@ void rrr(t_stacks **stacks)
 
 	if (!is_checker)
 		ft_putstr("rrr\n");
-	if (debug)
-		db_delayprint(a_rrr, stacks);
+	// if (debug)
+	// 	db_delayprint(a_rrr, stacks);
 }

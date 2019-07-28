@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include <push_swap.h>
 
 void ft_swap(t_stack **stack)
 {
@@ -6,7 +6,6 @@ void ft_swap(t_stack **stack)
 	// is only one or no elements).
 	t_stack *elem1;
 	t_stack *elem2;
-	t_stack	*temp;
 
 	if ((*stack)->next && (*stack)->next->next)
 	{
@@ -52,7 +51,30 @@ void ft_rotate(t_stack **stack)
 	}
 }
 
+
 void ft_reverse(t_stack **stack)
+{
+	t_stack *first;
+	t_stack *last;
+	t_stack *second_last;
+
+	first = (*stack)->next;
+	if (!(last = first->next))
+		return ;
+	while (last->next)
+		last = last->next;
+	if (last == first->next)
+		return (ft_swap(stack));
+	if (!(second_last = first->next))
+		return ;
+	while (second_last->next->next)
+		second_last = second_last->next;
+	second_last->next = NULL;
+	(*stack)->next = last;
+	last->next = first;
+}
+
+void ft_reverse_old(t_stack **stack)
 {
 	t_stack *master;
 	t_stack *first;
@@ -77,13 +99,7 @@ void ft_reverse(t_stack **stack)
 
 
 		if (first->next == last)
-		{
-			master->next = last;
-			first->next = last->next;
-			last->next = first;
-		}
-			// return ft_swap(stack);
-
+			return ft_swap(stack);
 		master->next = last;
 		last->prev->next = NULL;
 		second_last->next = NULL;

@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include <push_swap.h>
 
 bool	ft_hasdupe(t_stack **stack)
 {
