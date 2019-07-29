@@ -5,6 +5,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <libft.h>
+# include <limits.h>
 # define true	1
 # define false	0
 # define RED   "\x1B[31m"
@@ -118,6 +119,8 @@ int len_to_end(t_stack *head, t_stack *item);
 // Sanatise Input 
 bool				input_sane(int argc, char **argv);
 t_stack *get_last_item(t_stack *stack);
-
+bool	preflight(int argc, char **argv);
+bool	args_are_digits(int argc, char **argv);
+bool	args_fit_int(int argc, char **argv);
 
 #endif

@@ -139,13 +139,6 @@ void largest_to_top(t_stacks **container)
 	pa(container);
 }
 
-bool	 do_ss(int a1, int a2, int b1, int b2)
-{
-	if (a1 > a2 && b1 < b2)
-		return (true);
-	return (false);
-}
-
 void maybe(t_stacks **container)
 {
 	t_stacks *stacks = *container;
@@ -198,6 +191,28 @@ void push_back_to_a(t_stacks **container)
 
 extern int debug;
 
+void maybe_swap_b(t_stacks **container)
+{
+	t_stacks *stacks = *container;
+	t_stack *b = *(stacks->b);
+	t_stack *first;
+	t_stack *second;
+
+	first = b->next;
+	if (!first)
+		return ;
+	second = first->next;
+	if (second)
+	{
+		if (first->value < second->value)
+			rr(container);
+		else
+			ss(container);
+		
+	}
+}
+
+
 void ft_gabbysort(t_stacks **container)
 {
 	t_stacks *stacks = *container;
@@ -222,6 +237,7 @@ void ft_gabbysort(t_stacks **container)
 				rra(container);
 			pb(container);
 		}
+		maybe_swap_b(container);
 	}
 	push_back_to_a(container);
 }

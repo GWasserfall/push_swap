@@ -37,15 +37,12 @@ void	ft_runactions(t_stacks **container)
 	int ret;
 
 	line = ft_strnew(0);
-	while ((ret = get_next_line(0, &line)) >= 0)
-	{
-		printf("%d\n", ret);
+	while ((ret = get_next_line(0, &line)) > 0)
 		if (!(ft_act(container, line)))
 		{
-			printf("Incorrect input :(\n");
 			return ;
+			free(line);
 		}
-	}
 }
 
 int main(int argc, char **argv)
@@ -55,29 +52,20 @@ int main(int argc, char **argv)
 	t_stacks	*container;
 	int			i;
 
-	if (!(input_sane(argc, argv)))
-		return (1);
+	if (!(preflight(argc, argv)))
+		return 1;
 	i = 1;
 	stack_a = ft_stackinit();
 	stack_b = ft_stackinit();
-
 	if (argc > 1)
-	{
 		while (i < argc)
-			ft_appendelem(&stack_a, atoi(argv[i++]));
-	}
-
+			ft_appendelem(&stack_a, ft_atoi(argv[i++]));
 	container = ft_containstacks(&stack_a, &stack_b, true);
-
 	ft_runactions(&container);
-
 	if (ft_sorted(&stack_a, &stack_b))
-		printf("OK\n");
+		ft_putstr(GRN "OK!\n" RESET);
 	else
-	{
-		printf("KO\n");
-	}
-
+		ft_putstr(RED "KO!\n" RESET);
 	return (0);
 }
 

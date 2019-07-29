@@ -7,6 +7,8 @@ void ft_swap(t_stack **stack)
 	t_stack *elem1;
 	t_stack *elem2;
 
+	if (!(*stack)->next)
+		return ;
 	if ((*stack)->next && (*stack)->next->next)
 	{
 		elem1 = (*stack)->next;
@@ -29,8 +31,9 @@ void ft_rotate(t_stack **stack)
 
 	master = (*stack);
 	first = master->next;
+	if (!first)
+		return ;
 	last = first->next;
-
 	if (first && last)
 	{
 		while (last->next)
@@ -59,6 +62,8 @@ void ft_reverse(t_stack **stack)
 	t_stack *second_last;
 
 	first = (*stack)->next;
+	if (!first)
+		return ;
 	if (!(last = first->next))
 		return ;
 	while (last->next)
