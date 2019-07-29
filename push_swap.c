@@ -3,29 +3,7 @@
 int acount = 0;
 bool debug = false;
 
-void normalise(t_stack *stacka, int count)
-{
-	t_stack *cursor;
-	t_stack *maximum;
 
-	if (count < 1)
-		return ;
-	maximum = stacka->next;
-	cursor = stacka->next;
-	while (maximum && maximum->index > -1)
-		maximum = maximum->next;
-	while (cursor)
-	{
-		if (cursor->index < 0)
-		{
-			if (cursor->value > maximum->value)
-				maximum	 = cursor;
-		}
-		cursor = cursor->next;
-	}
-	maximum->index = count;
-	normalise(stacka, --count);
-}
 
 
 t_stack *get_item_by_index(t_stack *stack, int index)
@@ -111,6 +89,7 @@ void	run_algorithm(int count, t_stacks **container)
 	{
 		group_nodes(a, 5);
 		ft_gabbysort(container);
+		//ft_anotherway(container);
 	}
 	else
 	{

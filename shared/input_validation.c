@@ -46,6 +46,7 @@ bool	args_are_digits(int argc, char **argv)
 				ft_putstr(RED "Error!" RESET "  (Non-digit found in arguments [");
 				ft_putchar(argv[i][j - 1]);
 				ft_putstr("])\n");
+				printf("%d - %s\n", argc, argv[i]);
 				return (false);
 			}
 			j++;

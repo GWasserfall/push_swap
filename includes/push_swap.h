@@ -1,3 +1,9 @@
+#ifndef __STDBOOL_H
+# define true	1
+# define false	0
+typedef int bool;
+#endif
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <string.h>
@@ -6,8 +12,6 @@
 # include <unistd.h>
 # include <libft.h>
 # include <limits.h>
-# define true	1
-# define false	0
 # define RED   "\x1B[31m"
 # define GRN   "\x1B[32m"
 # define RESET "\x1B[0m"
@@ -37,7 +41,7 @@ typedef struct			s_actions
 }						t_actions;
 
 
-typedef int bool;
+
 typedef struct		s_stack
 {
 	int 			value;
@@ -114,6 +118,7 @@ void	ft_sort_below_thirty(t_stacks **container);
 
 
 int len_from_start(t_stack *head, t_stack *item);
+void	ft_anotherway(t_stacks **container);
 int len_to_end(t_stack *head, t_stack *item);
 
 // Sanatise Input 
@@ -122,5 +127,9 @@ t_stack *get_last_item(t_stack *stack);
 bool	preflight(int argc, char **argv);
 bool	args_are_digits(int argc, char **argv);
 bool	args_fit_int(int argc, char **argv);
+
+int visualize_stacks(t_stacks *container);
+void normalise(t_stack *stacka, int count);
+bool	ft_act(t_stacks **container, char *str);
 
 #endif

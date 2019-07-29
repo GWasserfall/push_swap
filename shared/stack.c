@@ -1,5 +1,29 @@
 #include <push_swap.h>
 
+void normalise(t_stack *stacka, int count)
+{
+	t_stack *cursor;
+	t_stack *maximum;
+
+	if (count < 1)
+		return ;
+	maximum = stacka->next;
+	cursor = stacka->next;
+	while (maximum && maximum->index > -1)
+		maximum = maximum->next;
+	while (cursor)
+	{
+		if (cursor->index < 0)
+		{
+			if (cursor->value > maximum->value)
+				maximum	 = cursor;
+		}
+		cursor = cursor->next;
+	}
+	maximum->index = count;
+	normalise(stacka, --count);
+}
+
 bool ft_sorted(t_stack **stack, t_stack **helper)
 {
 	if ((*helper)->next)

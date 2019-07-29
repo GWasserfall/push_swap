@@ -38,11 +38,12 @@ void	ft_runactions(t_stacks **container)
 
 	line = ft_strnew(0);
 	while ((ret = get_next_line(0, &line)) > 0)
-		if (!(ft_act(container, line)))
+	{	if (!(ft_act(container, line)))
 		{
 			return ;
 			free(line);
 		}
+	}
 }
 
 int main(int argc, char **argv)
@@ -61,11 +62,14 @@ int main(int argc, char **argv)
 		while (i < argc)
 			ft_appendelem(&stack_a, ft_atoi(argv[i++]));
 	container = ft_containstacks(&stack_a, &stack_b, true);
-	ft_runactions(&container);
-	if (ft_sorted(&stack_a, &stack_b))
-		ft_putstr(GRN "OK!\n" RESET);
-	else
-		ft_putstr(RED "KO!\n" RESET);
-	return (0);
+	normalise(stack_a, argc - 1);
+	visualize_stacks(container);
+	// //return 0;
+	// ft_runactions(&container);
+	// if (ft_sorted(&stack_a, &stack_b))
+	// 	ft_putstr(GRN "OK!\n" RESET);
+	// else
+	// 	ft_putstr(RED "KO!\n" RESET);
+	// return (0);
 }
 

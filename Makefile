@@ -4,7 +4,7 @@ push_swap:
 	@$(CC) $(flags) ./push_swap.c ./shared/*.c ./algorithms/*.c ./library/libft.a -I./includes -o push_swap
 
 checker:
-	@$(CC) $(flags) ./checker.c ./shared/*.c ./algorithms/*.c ./library/libft.a -I./includes -o checker
+	@$(CC) ./visualizer.c ./checker.c ./shared/*.c ./algorithms/*.c ./library/libft.a -I./includes -lncurses -o checker
 
 fclean:
 	@$(RM) ./checker
