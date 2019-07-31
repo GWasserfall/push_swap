@@ -177,13 +177,13 @@ void push_back_to_a(t_stacks **container)
 		bf = b->next;
 		bl = get_last_item(b);
 	
-		if (b->next->next)
-			if ((bf->value < bf->next->value))
-				sb(container);
+		// if (b->next->next)
+		// 	if ((bf->value < bf->next->value))
+		// 		sb(container);
 	
-		if (af && af->next)
-			if (af->value > af->next->value)
-				sa(container);
+		// if (af && af->next)
+		// 	if (af->value > af->next->value)
+		// 		sa(container);
 		
 		largest_to_top(container);		
 	}
@@ -217,6 +217,7 @@ void ft_gabbysort(t_stacks **container)
 {
 	t_stacks *stacks = *container;
 	t_stack *a = *(stacks->a);
+	t_stack *b = *(stacks->b);
 	t_stack *first;
 	t_stack *last;
 	int group;
@@ -239,5 +240,8 @@ void ft_gabbysort(t_stacks **container)
 		}
 		maybe_swap_b(container);
 	}
+	
+	getchar();
 	push_back_to_a(container);
+
 }

@@ -87,9 +87,10 @@ void	run_algorithm(int count, t_stacks **container)
 		ft_sort_below_thirty(container);
 	else if (count < 101)
 	{
-		group_nodes(a, 5);
-		ft_gabbysort(container);
+		group_nodes(a, 4);
+		//ft_gabbysort(container);
 		//ft_anotherway(container);
+		ft_midsplit(container);
 	}
 	else
 	{

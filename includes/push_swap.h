@@ -82,6 +82,9 @@ void rrr(t_stacks **stacks);
 void				db_printstacks(t_stack **a, t_stack **b);
 void				db_delayprint(enum actions action, t_stacks **stacks);
 
+void largest_to_top(t_stacks **container);
+int slen(t_stack *stack);
+
 // stack
 bool				ft_appendelem(t_stack **stack, int value);
 t_stack				*ft_newelem(int value);
@@ -110,6 +113,7 @@ void				show_stack(t_stack *head);
 int					index_of(t_stack **stack, int number);
 int					stack_len(t_stack *stack);
 int					get_min(t_stack **stack);
+void				ft_midsplit(t_stacks **container);
 
 long				ft_atol(char *string);
 
