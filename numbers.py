@@ -13,7 +13,7 @@ def args(count):
 	uni = set()
 
 	while len(uni) < int(count):
-		uni.add(randint(-100, int(count)))
+		uni.add(randint(-10, int(count)))
 
 	l = [str(x) for x in uni]
 	shuffle(l)
