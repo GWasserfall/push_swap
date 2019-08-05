@@ -134,36 +134,26 @@ int visualize_stacks(t_stacks *container)
 	t_stacks *stacks = container;
 	t_stack *a = *(stacks->a);
 	t_stack *b = *(stacks->b);
-
-	//initscr();
-	newterm(NULL, stderr, stdin);
-	//cbreak();
-	start_color();
-	
 	char *line;
 	int ret;
 	int count;
 
+	newterm(NULL, stderr, stdin);
+	start_color();
 	count = 0;
 	line = ft_strnew(0);
-
-
 	while ((ret = get_next_line(0, &line)) > 0)
 	{	
 		usleep(10000);
 		if (!(ft_act(&container, line)))
-		{
 		 	free(line);
-		}
 		print_stacks(a, b, line, count++);
 		refresh();
 	}
 	print_stacks(a, b, line, count++);
 	while (1)
 	;	
-
 	curs_set(TRUE);
 	endwin();
-	
 	return 0;
 }
