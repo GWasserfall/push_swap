@@ -139,85 +139,19 @@ void largest_to_top(t_stacks **container)
 	pa(container);
 }
 
-void maybe(t_stacks **container)
-{
-	t_stacks *stacks = *container;
-	t_stack *a = *(stacks->a);
-	t_stack *b = *(stacks->b);
-	t_stack *a_first;
-	t_stack *b_first;
-	t_stack *a_second;
-	t_stack *b_second;
-
-	a_first = a->next;
-	b_first = b->next;	
-	if (!a_first || !b_first)
-		return ;
-	a_second = a_first->next;
-	b_second = b_first->next;
-	if (!a_second || !b_second)
-		return ;
-}
-
-
 void push_back_to_a(t_stacks **container)
 {
 	t_stacks *stacks = *container;
-	t_stack *a = *(stacks->a);
 	t_stack *b = *(stacks->b);
 
-	t_stack *af;
-	t_stack *al;
-	t_stack *bf;
-	t_stack *bl;
 	while (b->next)
-	{
-		af = a->next;
-		al = get_last_item(a);
-		bf = b->next;
-		bl = get_last_item(b);
-	
-		// if (b->next->next)
-		// 	if ((bf->value < bf->next->value))
-		// 		sb(container);
-	
-		// if (af && af->next)
-		// 	if (af->value > af->next->value)
-		// 		sa(container);
-		
-		largest_to_top(container);		
-	}
+		largest_to_top(container);
 }
-
-extern int debug;
-
-void maybe_swap_b(t_stacks **container)
-{
-	t_stacks *stacks = *container;
-	t_stack *b = *(stacks->b);
-	t_stack *first;
-	t_stack *second;
-
-	first = b->next;
-	if (!first)
-		return ;
-	second = first->next;
-	if (second)
-	{
-		if (first->value < second->value)
-			rr(container);
-		else
-			ss(container);
-		
-	}
-}
-
 
 void ft_gabbysort(t_stacks **container)
 {
 	t_stacks *stacks = *container;
 	t_stack *a = *(stacks->a);
-	t_stack *b = *(stacks->b);
 	t_stack *first;
 	t_stack *last;
 	int group;
@@ -238,10 +172,6 @@ void ft_gabbysort(t_stacks **container)
 				rra(container);
 			pb(container);
 		}
-		maybe_swap_b(container);
 	}
-	
-	getchar();
 	push_back_to_a(container);
-
 }

@@ -1,6 +1,4 @@
 #include <push_swap.h>
-int acount;
-bool debug = false;
 
 bool	ft_act(t_stacks **container, char *str)
 {
@@ -52,6 +50,7 @@ int main(int argc, char **argv)
 	t_stack		*stack_b;
 	t_stacks	*container;
 	int			i;
+	int			visualize;
 
 	if (!(preflight(argc, argv)))
 		return 1;
@@ -64,12 +63,11 @@ int main(int argc, char **argv)
 	container = ft_containstacks(&stack_a, &stack_b, true);
 	normalise(stack_a, argc - 1);
 	visualize_stacks(container);
-	// //return 0;
-	// ft_runactions(&container);
-	// if (ft_sorted(&stack_a, &stack_b))
-	// 	ft_putstr(GRN "OK!\n" RESET);
-	// else
-	// 	ft_putstr(RED "KO!\n" RESET);
-	// return (0);
+	return 0;
+	ft_runactions(&container);
+	if (ft_sorted(&stack_a, &stack_b))
+		ft_putstr(GRN "OK!\n" RESET);
+	else
+		ft_putstr(RED "KO!\n" RESET);
+	return (0);
 }
-

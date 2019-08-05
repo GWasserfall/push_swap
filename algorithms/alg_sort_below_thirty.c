@@ -18,15 +18,14 @@ void	push_smallest_to_b(t_stacks **container)
 {
 	t_stacks *stacks = *container;
 	t_stack *a = *(stacks->a);
-	//t_stack *b = *(stacks->b);
 	t_stack *smallest;
 	t_stack *cursor;
 
 	smallest = a->next;
 	cursor = smallest;
-	while (cursor->next)
+	while (cursor)
 	{
-		if (cursor->value < smallest->value)
+		if (cursor->index < smallest->index)
 			smallest = cursor;
 		cursor = cursor->next;
 	}

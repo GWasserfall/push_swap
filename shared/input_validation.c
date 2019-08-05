@@ -46,7 +46,6 @@ bool	args_are_digits(int argc, char **argv)
 				ft_putstr(RED "Error!" RESET "  (Non-digit found in arguments [");
 				ft_putchar(argv[i][j - 1]);
 				ft_putstr("])\n");
-				printf("%d - %s\n", argc, argv[i]);
 				return (false);
 			}
 			j++;
@@ -60,6 +59,11 @@ bool	preflight(int argc, char **argv)
 {
 	if (argc > 1)
 	{
+		if (argc == 2)
+		{
+			ft_putstr(RED "Error!" RESET "  (Each digit should be an argument)\n");
+			return (false);
+		}
 		if (!(args_are_digits(argc, argv)))
 			return (false);
 		if (!(args_fit_int(argc, argv)))

@@ -24,30 +24,6 @@ bool	ft_hasdupe(t_stack **stack)
 	return false;
 }
 
-int		ft_top(t_stack **stack)
-{
-	// Not safe to run on empty stack :(
-	return ((*stack)->next->value);
-}
-
-int		ft_bottom(t_stack **stack)
-{
-	t_stack *cursor;
-	cursor = (*stack)->next;
-	while (cursor->next)
-	{
-		cursor = cursor->next;
-	}
-	return (cursor->value);
-}
-
-bool	ft_isempty(t_stack **stack)
-{
-	if ((*stack)->next)
-		return (false);
-	return (true);
-}
-
 long ft_atol(char *string)
 {
 	long negative;

@@ -37,7 +37,7 @@ void print_left_stack(t_stack *a)
 	int stacklen;
 	int color_pair;
 
-	stacklen = slen(a);
+	stacklen = stack_len(a);
 	row = 2;
 	a = a->next;
 	while (a)
@@ -74,7 +74,7 @@ void print_right_stack(t_stack *a)
 	int stacklen;
 	int color_pair;
 
-	stacklen = slen(a);
+	stacklen = stack_len(a);
 	row = 2;
 	a = a->next;
 	while (a)
@@ -161,19 +161,6 @@ int visualize_stacks(t_stacks *container)
 	print_stacks(a, b, line, count++);
 	while (1)
 	;	
-	
-	// char str[40];
-	// print_stacks(a, b, "asd", count++);
-	// while (getstr(str))
-	// {
-	// 	printf("asd");
-	// 	usleep(10000);
-	// 	refresh();
-	// 	mvprintw(40, COLS / 2, "WHY??????");
-		
-	// 	ft_act(&container, str);
-		
-	// }
 
 	curs_set(TRUE);
 	endwin();

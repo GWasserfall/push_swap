@@ -2,8 +2,6 @@
 
 void ft_swap(t_stack **stack)
 {
-	//sa : swap a - swap the first 2 elements at the top of stack a. Do nothing if there
-	// is only one or no elements).
 	t_stack *elem1;
 	t_stack *elem2;
 
@@ -23,8 +21,6 @@ void ft_swap(t_stack **stack)
 
 void ft_rotate(t_stack **stack)
 {
-	//ra : rotate a - shift up all elements of stack a by 1. The first element becomes
-	// the last one.
 	t_stack	*master;
 	t_stack *first;
 	t_stack *last;
