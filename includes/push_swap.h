@@ -105,6 +105,8 @@ void				ft_gabbysort(t_stacks **container);
 void				ft_sort_four(t_stacks **container);
 void				ft_sort_five(t_stacks **container);
 void				ft_sort_two(t_stacks **container);
+void flabbysort(t_stacks **container);
+void slottysort(t_stacks **container);
 
 int					get_value_at_index(t_stack **stack, int index);
 

@@ -1,5 +1,17 @@
 #include <push_swap.h>
 
+int contains_index(t_stack *stack, int index)
+{
+	stack = stack->next;
+	while (stack)
+	{
+		if (stack->index == index)
+			return 1;
+		stack = stack->next;
+	}
+	return (0);
+}
+
 int get_base_group(t_stack *stack)
 {
 	int group;
@@ -63,6 +75,26 @@ t_stack *first_item_in_group(t_stack *stack, int group)
 		stack = stack->next;
 	}
 	return (NULL);
+}
+
+t_stack *largest_in_group(t_stack *stack, int group)
+{
+	t_stack *result;
+
+	result = NULL;
+	while (stack)
+	{
+		if (stack->group == group)
+		{
+			if (!result)
+				result = stack;
+			if (stack->index > result->index)
+				return (result);
+				//result = stack;
+		}
+		stack = stack->next;
+	}
+	return (result);
 }
 
 t_stack *get_last_item(t_stack *stack)
@@ -169,9 +201,185 @@ void ft_gabbysort(t_stacks **container)
 		else
 		{
 			while (a->next != last)
+			{
 				rra(container);
+			}
 			pb(container);
 		}
 	}
 	push_back_to_a(container);
+}
+
+
+void flabbysort(t_stacks **container)
+{
+	t_stacks *stacks = *container;
+	t_stack *a = *(stacks->a);
+	t_stack *first;
+	int group;
+
+	while ((group = get_base_group(*(stacks->a))))
+	{
+		first = largest_in_group(*(stacks->a), group);
+		if (len_from_start(a, first) < len_to_end(a, first))
+		{
+			while (a->next != first)
+				ra(container);
+			pb(container);
+		}
+		else
+		{
+			while (a->next != first)
+			{
+				rra(container);
+			}
+			pb(container);
+		}
+	}
+	push_back_to_a(container);
+}
+
+
+int start(t_stack *stack)
+{
+	stack = stack->next;
+	if (stack)
+		return (stack->index);
+	else
+		return (0);
+}
+
+int end(t_stack *stack)
+{
+	stack = stack->next;
+	while (stack->next)
+		stack = stack->next;
+	return (stack->index);
+}
+
+int min_index(t_stack *stack)
+{
+	int min;
+
+	stack = stack->next;
+	if (!stack)
+		return (0);
+	min = stack->index;
+	while (stack->next)
+	{
+		if (stack->index < min)
+			min = stack->index;
+		stack = stack->next;
+	}
+	return min;
+}
+
+
+int max_index(t_stack *stack)
+{
+	int max;
+
+	stack = stack->next;
+	if (stack)
+		max = stack->index;
+	else
+		return 0;
+
+	while (stack->next)
+	{
+		if (stack->index > max)
+			max = stack->index;
+		stack = stack->next;
+	}
+	return max;
+}
+
+int is_optimal(t_stacks **container, int index)
+{
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*container)->a;
+	b = *(*container)->b;
+
+	if (index > max_index(b) && b->next->index == max_index(b))
+		return 1;
+	
+	if (index < min_index(b) && b->next->index == min_index(b))
+		return 1;
+
+	if (index > start(b) && index < end(b))
+		return 1;
+
+	if (index < start(b))
+		return -1;
+	
+	return (-1);
+}
+
+int direction(t_stack *stack, int index)
+{
+	t_stack *start;
+	t_stack *end;
+	int distance;
+
+	distance = 0;
+	start = stack->next;
+	end = start;
+	while (end->next)
+		end = end->next;
+		
+	while (1)
+	{
+		if (index < end->index && index > start->index)
+			break;
+		if (index < start->index && index > start->next->index)
+			break;
+		distance++;
+		start = start->next;
+	}
+	return distance;
+}
+
+
+
+
+void slottysort(t_stacks **container)
+{
+	t_stack *a;
+	t_stack *b;
+
+	a = *(*container)->a;
+	b = *(*container)->b;
+
+	while (contains_index(a, 1))
+	{
+		if (a->next->index == 1)
+			pb(container);
+		else
+			ra(container);
+	}
+
+	int max = max_index(a);
+	
+	while (contains_index(a, max))
+	{
+		if (a->next->index == max)
+			pb(container);
+		else
+			ra(container);
+	}
+
+	int dir;
+	while (a->next)
+	{
+		dir = direction(b, a->next->index);
+		if (dir > 0)
+			rb(container);
+		else if (dir < 0)
+			rrb(container);
+		else
+			pb(container);
+	}
+
 }

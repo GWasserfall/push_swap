@@ -139,12 +139,13 @@ int visualize_stacks(t_stacks *container)
 	int count;
 
 	newterm(NULL, stderr, stdin);
+	curs_set(FALSE);
 	start_color();
 	count = 0;
 	line = ft_strnew(0);
 	while ((ret = get_next_line(0, &line)) > 0)
 	{	
-		usleep(10000);
+		usleep(50000);
 		if (!(ft_act(&container, line)))
 		 	free(line);
 		print_stacks(a, b, line, count++);
