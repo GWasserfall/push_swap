@@ -343,43 +343,172 @@ int direction(t_stack *stack, int index)
 
 
 
+void min_to_b(t_stacks **container, t_stack *a)
+{
+	t_stack *start;
+	start = a;
+	a = a->next;
+	while (a)
+	{
+		if (a->index == 1)
+			break;
+		a = a->next;
+	}
+	if (len_from_start(start, a) < len_to_end(start, a))
+		while (start->next != a)
+			ra(container);
+	else
+		while (start->next != a)
+			rra(container);
+	pb(container);
+}
+
+void max_to_b(t_stacks **container, t_stack *a, int max_index)
+{
+	t_stack *start;
+
+	start = a;
+	a = a->next;
+	while (a)
+	{
+		if (a->index == max_index)
+			break;
+		a = a->next;
+	}
+	if (len_from_start(start, a) < len_to_end(start, a))
+		while (start->next != a)
+			ra(container);
+	else
+		while (start->next != a)
+			rra(container);
+	pb(container);
+}
+
+int stack_is_long(t_stack *stack)
+{
+	int count;
+
+	count = 0;
+	stack = stack->next;
+	while (stack)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
+}
+
+
+int	up(t_stack *b, int index)
+{
+	t_stack *start;
+	int len;
+	int dist;
+
+	start = b;
+	len = stack_is_long(b);
+	dist = 0;
+	b = b->next;
+
+	while (b->next)
+	{
+		// if (index == 22)
+		// {
+		// 	printf("%d > %d && < %d\n", index,  b->index, b->next->index);
+		// 	printf("distance : %d and answer is %d\n", dist, (dist <= (len / 2)));
+		// 	getchar();
+		// }
+
+		if ((b->index == 1) && stack_is_long(start) > 2)
+		{
+			//printf("Skipping one\n");
+			b = b->next;
+		}
+		if (index < b->index && index > b->next->index)
+			break;
+		dist++;
+		b = b->next;
+		if (!b)
+			break;
+	}
+	//printf("dist = %d, len = %d, answer = %d\n", dist, len, (dist >= (len / 2)));
+	return ((dist <= (len / 2)));
+}
 
 void slottysort(t_stacks **container)
 {
 	t_stack *a;
 	t_stack *b;
+	int max_index;
 
 	a = *(*container)->a;
 	b = *(*container)->b;
 
-	while (contains_index(a, 1))
-	{
-		if (a->next->index == 1)
-			pb(container);
-		else
-			ra(container);
-	}
+	max_index = stack_is_long(a);
+	min_to_b(container, a);
+	max_to_b(container, a, max_index);
 
-	int max = max_index(a);
-	
-	while (contains_index(a, max))
-	{
-		if (a->next->index == max)
-			pb(container);
-		else
-			ra(container);
-	}
+	int s_start;
+	int s_end;
+	int this;
 
-	int dir;
 	while (a->next)
 	{
-		dir = direction(b, a->next->index);
-		if (dir > 0)
-			rb(container);
-		else if (dir < 0)
-			rrb(container);
-		else
+		s_start = start(b);
+		s_end  = end(b);
+		this = a->next->index;
+		//getchar();d
+		if (this > s_start && this < s_end)
+		{
 			pb(container);
-	}
+			continue;
+		}
+		
+		if (stack_is_long(b) > 10 && stack_is_long(a) > 10)
+		{
+			// get the average for the first seconds and last number in a;
 
+			// average calcuated by adding a with first 3 in b;
+			t_stack *cb;
+			t_stack *ca;
+
+			int right;
+			right = 0;
+			cb = b->next;
+			if (cb->index == 1)
+				cb = cb->next;
+			right += cb->index;
+			right += cb->next->index;
+			right += cb->next->next->index;
+
+			int top;
+			int sec;
+			int last;
+
+			top = a->next->index;
+			sec = a->next->next->index;
+			ca = a->next;
+			while (ca->next)
+				ca = ca->next;
+			last = ca->index;
+
+			last = (last + right) / 4;
+			top = (top + right) / 4;
+			sec = (last + right) / 4;
+
+			if (last > top && last > sec)
+				rra(container);
+			if (sec > top && sec > last)
+				ra(container);
+			//getchar();
+		}
+
+
+		if (up(b, this) == 1)
+			rb(container);
+		else
+			rrb(container);
+		
+	}
+	push_back_to_a(container);
 }
