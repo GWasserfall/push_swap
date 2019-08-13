@@ -88,8 +88,9 @@ void	run_algorithm(int count, t_stacks **container)
 	else if (count < 101)
 	{
 		group_nodes(a, 6);
-		slottysort(container);
+		//slottysort(container);
 		// flabbysort(container);
+		gsort(container);
 	}
 	else
 	{

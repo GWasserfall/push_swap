@@ -147,7 +147,7 @@ int visualize_stacks(t_stacks *container)
 	line = ft_strnew(0);
 	while ((ret = get_next_line(0, &line)) > 0)
 	{	
-		usleep(80000);
+		usleep(50000);
 		if (!(ft_act(&container, line)))
 		 	free(line);
 		print_stacks(a, b, line, count++);

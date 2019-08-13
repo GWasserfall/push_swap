@@ -78,6 +78,8 @@ void rra(t_stacks **stacks);
 void rrb(t_stacks **stacks);
 void rrr(t_stacks **stacks);
 
+
+
 // debug
 void				db_printstacks(t_stack **a, t_stack **b);
 void				db_delayprint(enum actions action, t_stacks **stacks);
@@ -98,6 +100,7 @@ bool				ft_hasdupe(t_stack **stack);
 t_stacks			*ft_containstacks(t_stack **a, t_stack **b, bool is_checker);
 
 // alogos
+void				gsort(t_stacks **container);
 void				ft_kaksort(t_stacks **container);
 void				ft_sort_three(t_stacks **container);
 void				ft_slowsort(t_stacks **container);
@@ -105,8 +108,11 @@ void				ft_gabbysort(t_stacks **container);
 void				ft_sort_four(t_stacks **container);
 void				ft_sort_five(t_stacks **container);
 void				ft_sort_two(t_stacks **container);
-void flabbysort(t_stacks **container);
-void slottysort(t_stacks **container);
+void				flabbysort(t_stacks **container);
+void				slottysort(t_stacks **container);
+
+int max_index(t_stack *stack);
+int stack_is_long(t_stack *stack);
 
 int					get_value_at_index(t_stack **stack, int index);
 
@@ -116,6 +122,10 @@ int					index_of(t_stack **stack, int number);
 int					stack_len(t_stack *stack);
 int					get_min(t_stack **stack);
 void				ft_midsplit(t_stacks **container);
+
+void push_back_to_a(t_stacks **container);
+void largest_to_top(t_stacks **container);
+void ft_sort_three_b(t_stacks **container);
 
 long				ft_atol(char *string);
 

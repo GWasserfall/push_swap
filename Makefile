@@ -6,7 +6,7 @@ depend:
 	@make re -C libft
 
 push_swap:
-	@$(CC) $(FLAGS) ./push_swap.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -o push_swap
+	@$(CC) -g ./push_swap.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -o push_swap
 	@echo "push_swap OK!"
 
 checker:

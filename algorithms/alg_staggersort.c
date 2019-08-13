@@ -412,16 +412,9 @@ int	up(t_stack *b, int index)
 
 	while (b->next)
 	{
-		// if (index == 22)
-		// {
-		// 	printf("%d > %d && < %d\n", index,  b->index, b->next->index);
-		// 	printf("distance : %d and answer is %d\n", dist, (dist <= (len / 2)));
-		// 	getchar();
-		// }
 
 		if ((b->index == 1) && stack_is_long(start) > 2)
 		{
-			//printf("Skipping one\n");
 			b = b->next;
 		}
 		if (index < b->index && index > b->next->index)
@@ -444,6 +437,8 @@ void slottysort(t_stacks **container)
 	a = *(*container)->a;
 	b = *(*container)->b;
 
+	int total = stack_is_long(a);
+
 	max_index = stack_is_long(a);
 	min_to_b(container, a);
 	max_to_b(container, a, max_index);
@@ -451,6 +446,7 @@ void slottysort(t_stacks **container)
 	int s_start;
 	int s_end;
 	int this;
+	
 
 	while (a->next)
 	{
@@ -466,11 +462,27 @@ void slottysort(t_stacks **container)
 		
 		int dir = up(b, this);
 
-		if (stack_is_long(b) > 10 && stack_is_long(a) > 10)
+		if (stack_is_long(b) > total / 2)
 		{
-			if (a->next->index < 15)
-				rr(container);
+			while (a->next)
+			{
+				s_start = start(a);
+				s_end  = end(a);
+				if (this > s_start && this < s_end)
+				{
+					pb(container);
+					continue;
+				}
+				getchar();
+				this = b->next->index;
+				dir = up(b, this);
+				if (dir)
+					ra(container);
+				else
+					rra(container);
+			}
 		}
+
 		dir = up(b, this);
 		if (dir)
 			rb(container);
