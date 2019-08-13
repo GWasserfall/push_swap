@@ -464,51 +464,18 @@ void slottysort(t_stacks **container)
 			continue;
 		}
 		
+		int dir = up(b, this);
+
 		if (stack_is_long(b) > 10 && stack_is_long(a) > 10)
 		{
-			// get the average for the first seconds and last number in a;
-
-			// average calcuated by adding a with first 3 in b;
-			t_stack *cb;
-			t_stack *ca;
-
-			int right;
-			right = 0;
-			cb = b->next;
-			if (cb->index == 1)
-				cb = cb->next;
-			right += cb->index;
-			right += cb->next->index;
-			right += cb->next->next->index;
-
-			int top;
-			int sec;
-			int last;
-
-			top = a->next->index;
-			sec = a->next->next->index;
-			ca = a->next;
-			while (ca->next)
-				ca = ca->next;
-			last = ca->index;
-
-			last = (last + right) / 4;
-			top = (top + right) / 4;
-			sec = (last + right) / 4;
-
-			if (last > top && last > sec)
-				rra(container);
-			if (sec > top && sec > last)
-				ra(container);
-			//getchar();
+			if (a->next->index < 15)
+				rr(container);
 		}
-
-
-		if (up(b, this) == 1)
+		dir = up(b, this);
+		if (dir)
 			rb(container);
 		else
 			rrb(container);
-		
 	}
 	push_back_to_a(container);
 }

@@ -99,6 +99,8 @@ void print_stacks(t_stack *a, t_stack*b, char *action, int moves)
 	init_pair(4, COLOR_BLACK, COLOR_WHITE);
 	
 	print_left_stack(a);
+	if (ft_strlen(action) > 3)
+		mvprintw(2, COLS / 2, action);
 	print_header(action, moves);
 
 	if (!b->next)
@@ -145,7 +147,7 @@ int visualize_stacks(t_stacks *container)
 	line = ft_strnew(0);
 	while ((ret = get_next_line(0, &line)) > 0)
 	{	
-		usleep(10000);
+		usleep(80000);
 		if (!(ft_act(&container, line)))
 		 	free(line);
 		print_stacks(a, b, line, count++);
