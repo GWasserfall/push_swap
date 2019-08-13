@@ -482,7 +482,6 @@ void slottysort(t_stacks **container)
 					rra(container);
 			}
 		}
-
 		dir = up(b, this);
 		if (dir)
 			rb(container);

@@ -19,6 +19,9 @@ randints:
 random:
 	@echo `./randints $(c)`
 
+vs:
+	@$(CC) ./visualiser2.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o vs2
+
 fclean:
 	@$(RM) ./checker
 	@$(RM) ./push_swap

@@ -69,7 +69,6 @@ void	best_move(t_moves **move, t_stack *a, t_stack *b, int max)
 	m = *move;
 	a = a->next;
 
-
 	m->a_moves = 50;
 	m->b_moves = 50;
 	m->total = 100;
@@ -164,12 +163,12 @@ void gsort(t_stacks **container)
 
 		best_move(&this, a, b, main_max);
 
-		// print_stacks_old(a, b);
-		// printf("\n\nbest Move:: for %d\n", this->elem->index);
-		// printf("a_moves = %d\n", this->a_moves);
-		// printf("b_moves = %d\n", this->b_moves);
-		// printf("total = %d\n", this->total);
-		// getchar();
+		print_stacks_old(a, b);
+		printf("\n\nbest Move:: for %d\n", this->elem->index);
+		printf("a_moves = %d\n", this->a_moves);
+		printf("b_moves = %d\n", this->b_moves);
+		printf("total = %d\n", this->total);
+		getchar();
 		while (this->a_moves || this->b_moves)
 		{
 			if (this->b_moves > 0 && this->a_moves > 0)
