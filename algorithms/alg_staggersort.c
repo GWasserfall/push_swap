@@ -265,7 +265,7 @@ int min_index(t_stack *stack)
 	if (!stack)
 		return (0);
 	min = stack->index;
-	while (stack->next)
+	while (stack)
 	{
 		if (stack->index < min)
 			min = stack->index;
@@ -285,7 +285,7 @@ int max_index(t_stack *stack)
 	else
 		return 0;
 
-	while (stack->next)
+	while (stack)
 	{
 		if (stack->index > max)
 			max = stack->index;
@@ -293,6 +293,9 @@ int max_index(t_stack *stack)
 	}
 	return max;
 }
+
+
+
 
 int is_optimal(t_stacks **container, int index)
 {

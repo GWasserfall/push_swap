@@ -15,6 +15,22 @@ int end_index(t_stack *stack)
 	return (stack->index);
 }
 
+int closest_lower_index(t_stack *stack, int index)
+{
+	int i;
+
+	i = 0;
+
+	stack = stack->next;
+	while (stack)
+	{
+		if (stack->index > i && stack->index < index)
+			i = stack->index;
+		stack = stack->next;
+	}
+	return i;
+}
+
 int move_count(t_stack *stack, int norm)
 {
 	int count;
@@ -34,25 +50,68 @@ int move_count(t_stack *stack, int norm)
 
 	starts = stack->next;
 	
-	int maxb;
+	int next;
+	int iters;
+
+	iters = 0;
+	next = closest_lower_index(stack, norm);
 	stack = stack->next;
-	while (stack->next)
+	if (norm > max && start == max)
 	{
-		start = stack->index;
-		cur = starts;
-
-		if (norm > max && start == max)
-			break;
-		if (norm > start && norm < end)
-			break;
-
-		count++;
-		end = start;
-		stack = stack->next;
-
-		if (!stack)
-			break;
+		printf("%.2d is bigger than %.2d and %.2d is on top for %d moves\n", norm, max, max, iters);
+		return (0);
 	}
+
+	while (stack)
+	{
+		if (stack->index == next)
+			break;
+		count++;
+		stack = stack->next;
+	}
+
+	printf("count for %d is %d\n", norm, count);
+	if (count > len / 2)
+	{
+		
+		return count - len;
+	}
+	else
+	{
+		return count;
+	}
+	
+
+
+	// while (stack->next)
+	// {
+		
+	// 	start = stack->index;
+	// 	cur = starts;
+
+	// 	if (stack->index == next)
+	// 	{
+	// 		printf("%.2d should go ontop of %.2d for %d moves\n", norm, next, iters);
+	// 		break;
+	// 	}
+
+	// 	iters++;
+
+	// 	// if (norm > start && norm < end)
+	// 	// {
+	// 	// 	printf("%d will fit between start %d and end %d\n", norm, start, end);
+	// 	// 	break;
+	// 	// }
+
+
+
+	// 	count++;
+	// 	end = start;
+	// 	stack = stack->next;
+
+	// 	if (!stack)
+	// 		break;
+	// }
 
 	return count;
 }
@@ -63,7 +122,12 @@ void	best_move(t_moves **move, t_stack *a, t_stack *b, int max)
 	int position;
 	int len;
 	int lenb;
+	int amoves;
+	int bmoves;
+	int total;
 
+
+	bmoves = 0;
 	len = stack_is_long(a);
 	lenb = stack_is_long(b);
 	m = *move;
@@ -75,18 +139,25 @@ void	best_move(t_moves **move, t_stack *a, t_stack *b, int max)
 	m->elem = a;
 
 	position = 0;
-	int amoves;
-	int bmoves;
-	int total;
+	
 	while (a)
 	{
-		
 		amoves = (position > len / 2) ? position - len : position;
 		bmoves = move_count(b, a->index);
 		if (bmoves > lenb / 2)
 			bmoves = bmoves - lenb;
-		total = (amoves - bmoves > 0) ? amoves - bmoves : (amoves - bmoves) * -1;
+		
 
+		if (bmoves == amoves)
+		{
+			total = (bmoves > 0) ? bmoves : bmoves * -1;
+		}
+		else
+		{
+			total = (amoves - bmoves > 0) ? amoves - bmoves : (amoves - bmoves) * -1;
+			//total += (amoves > bmoves) ? bmoves : amoves;
+		}
+		
 		if (total < m->total)
 		{
 			m->a_moves = amoves;
@@ -94,6 +165,7 @@ void	best_move(t_moves **move, t_stack *a, t_stack *b, int max)
 			m->elem = a;
 			m->total = total;
 		}
+		printf("\tI [%d]  T [%d]  A [%d]  B[%d]\n", a->index, m->total, m->a_moves, m->b_moves);
 		position++;
 		a = a->next;
 	}
@@ -200,12 +272,12 @@ void gsort(t_stacks **container)
 			{
 				if (this->b_moves > 0)
 				{
-					rb(container);
+					rrb(container);
 					this->b_moves--;
 				}
 				else
 				{
-					rrb(container);
+					rb(container);
 					this->b_moves++;
 				}
 			}
