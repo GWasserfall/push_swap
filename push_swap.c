@@ -3,9 +3,6 @@
 int acount = 0;
 bool debug = false;
 
-
-
-
 t_stack *get_item_by_index(t_stack *stack, int index)
 {
 	t_stack *cursor;
@@ -78,13 +75,18 @@ void	run_algorithm(int count, t_stacks **container)
 {
 	t_stacks *stacks = *container;
 	t_stack *a = *(stacks->a);
+	t_moves *moves;
 
 	if (count == 2)
 		ft_sort_two(container);
 	else if (count == 3)
 		ft_sort_three(container);
 	else
-		gsort(container);
+	{
+		moves = (t_moves *)malloc(sizeof(t_moves));
+		gsort(container, &moves, stack_is_long(a));
+		free(moves);
+	}
 }
 
 void destroy_stack(t_stack *head)

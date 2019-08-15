@@ -2,6 +2,13 @@
 #include <push_swap.h>
 #include <locale.h>
 
+
+void	draw_stackw(WINDOW *window)
+{
+	mvwprintw(window, 1, 1, "Firsta line");
+    wrefresh(window);
+}
+
 int main()
 {
 	int ret;
@@ -35,7 +42,6 @@ int main()
     int width = 40;
     int srtheight = 1;
     int srtwidth = 1;
-    //initscr();
 
 	int sizel = (COLS / 2 - 10) / 2;
 	int sizer = COLS - sizel;
@@ -53,8 +59,10 @@ int main()
 	right_stack = newwin(LINES - 2, (COLS / 2 - 8), 1, COLS / 2 + 8);
 	box(right_stack, 0, 0);
 
-    mvwprintw(left_stack, 1, 1, "First line");
-    wrefresh(left_stack);
+
+	draw_stackw(left_stack);
+    //mvwprintw(left_stack, 1, 1, "First line");
+    //wrefresh(left_stack);
 
 
     mvwprintw(right_stack, 1, 1, "First line");

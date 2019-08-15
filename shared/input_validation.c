@@ -8,6 +8,8 @@ bool	args_fit_int(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
+		if (argv[i][0] == '-' && !(ft_isdigit(argv[i][1])))
+			continue;
 		current = ft_atol(argv[i]);
 		if (current > INT_MAX)
 		{
@@ -39,6 +41,8 @@ bool	args_are_digits(int argc, char **argv)
 		j = 0;
 		while (argv[i][j])
 		{
+			if (argv[i][0] == '-' && !(ft_isdigit(argv[i][1])))
+				continue;
 			if (!(ft_isdigit(argv[i][j])))
 			{
 				if (argv[i][j++] == '-' && argv[i][j] != '-')

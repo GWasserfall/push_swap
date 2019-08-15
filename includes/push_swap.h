@@ -19,27 +19,6 @@ typedef int bool;
 # define BOTH 0
 # define RIGHT 1
 
-enum actions 
-{
-	a_ra,  // 0
-	a_rb,  // 1
-	a_rr,  // 2
-	a_sa,  // 3
-	a_sb,  // 4
-	a_ss,  // 5
-	a_pa,  // 6
-	a_pb,  // 7
-	a_rra, // 8
-	a_rrb, // 9
-	a_rrr  // 10
-};
-
-typedef struct			s_actions
-{
-	enum actions		action;
-	struct s_actions	*next;
-}						t_actions;
-
 
 
 typedef struct		s_stack
@@ -58,6 +37,15 @@ typedef struct		s_stacks
 	t_stack 		**a;
 	t_stack 		**b;
 }					t_stacks;
+
+
+typedef struct	s_moves
+{
+	t_stack		*elem;
+	int			a_moves;
+	int			b_moves;
+	int			total;
+}				t_moves;
 
 // actions_backend
 void	ft_swap(t_stack **stack);
@@ -82,7 +70,6 @@ void rrr(t_stacks **stacks);
 
 // debug
 void				db_printstacks(t_stack **a, t_stack **b);
-void				db_delayprint(enum actions action, t_stacks **stacks);
 
 void largest_to_top(t_stacks **container);
 int slen(t_stack *stack);
@@ -100,7 +87,7 @@ bool				ft_hasdupe(t_stack **stack);
 t_stacks			*ft_containstacks(t_stack **a, t_stack **b, bool is_checker);
 
 // alogos
-void				gsort(t_stacks **container);
+void				gsort(t_stacks **container, t_moves **moves, int a_max);
 void				ft_kaksort(t_stacks **container);
 void				ft_sort_three(t_stacks **container);
 void				ft_slowsort(t_stacks **container);
