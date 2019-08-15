@@ -279,7 +279,8 @@ int max_index(t_stack *stack)
 {
 	int max;
 
-	stack = stack->next;
+
+	//stack = stack->next;
 	if (stack)
 		max = stack->index;
 	else

@@ -110,6 +110,7 @@ void				ft_sort_five(t_stacks **container);
 void				ft_sort_two(t_stacks **container);
 void				flabbysort(t_stacks **container);
 void				slottysort(t_stacks **container);
+int min_index(t_stack *stack);
 
 int max_index(t_stack *stack);
 int stack_is_long(t_stack *stack);

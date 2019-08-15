@@ -83,20 +83,8 @@ void	run_algorithm(int count, t_stacks **container)
 		ft_sort_two(container);
 	else if (count == 3)
 		ft_sort_three(container);
-	//else if (count < 31)
-	//	ft_sort_below_thirty(container);
-	else if (count < 101)
-	{
-		group_nodes(a, 6);
-		//slottysort(container);
-		// flabbysort(container);
-		gsort(container);
-	}
 	else
-	{
-		group_nodes(a, 13);
-		ft_gabbysort(container);
-	}
+		gsort(container);
 }
 
 void destroy_stack(t_stack *head)
