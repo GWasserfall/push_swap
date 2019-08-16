@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions_back_01.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 20:59:19 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/16 20:59:21 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
-void ft_swap(t_stack **stack)
+void	ft_swap(t_stack **stack)
 {
 	t_stack *elem1;
 	t_stack *elem2;
@@ -19,7 +31,7 @@ void ft_swap(t_stack **stack)
 	}
 }
 
-void ft_rotate(t_stack **stack)
+void	ft_rotate(t_stack **stack)
 {
 	t_stack	*master;
 	t_stack *first;
@@ -34,24 +46,17 @@ void ft_rotate(t_stack **stack)
 	{
 		while (last->next)
 			last = last->next;
-	
 		if (first->next == last)
-			return ft_swap(stack);
-			
-		// second is now first
+			return (ft_swap(stack));
 		master->next = first->next;
 		first->next->prev = master;
-		
-
 		last->next = first;
 		first->prev = last;
 		first->next = NULL;
-
 	}
 }
 
-
-void ft_reverse(t_stack **stack)
+void	ft_reverse(t_stack **stack)
 {
 	t_stack *first;
 	t_stack *last;
@@ -75,54 +80,18 @@ void ft_reverse(t_stack **stack)
 	last->next = first;
 }
 
-void ft_reverse_old(t_stack **stack)
-{
-	t_stack *master;
-	t_stack *first;
-	t_stack *last;
-	t_stack *second_last;
-	
-
-	master = *stack;
-	
-	first = master->next;
-	if (!first)
-		return ;
-	last = first->next;
-	second_last = last;
-	if (first && last)
-	{
-		while (last->next)
-			last = last->next;
-
-		while (second_last->next->next)
-			second_last = second_last->next;
-
-
-		if (first->next == last)
-			return ft_swap(stack);
-		master->next = last;
-		last->prev->next = NULL;
-		second_last->next = NULL;
-		last->prev = master;
-		last->next = first;
-		first->prev = last;
-	}
-}
-
 void	ft_push(t_stack **sender, t_stack **receiver)
 {
 	t_stack *s_first;
 	t_stack *r_first;
-	
+
 	s_first = (*sender)->next;
 	r_first = (*receiver)->next;
-
 	if (!s_first)
 		return ;
 	(*sender)->next = s_first->next;
 	if ((*sender)->next)
-		(*sender)->next->prev = (*sender); 
+		(*sender)->next->prev = (*sender);
 	(*receiver)->next = s_first;
 	s_first->prev = (*receiver);
 	if (!r_first)

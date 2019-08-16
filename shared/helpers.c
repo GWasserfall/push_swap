@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 20:25:58 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/16 20:25:59 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
 bool	ft_hasdupe(t_stack **stack)
@@ -10,24 +22,24 @@ bool	ft_hasdupe(t_stack **stack)
 	while (true)
 	{
 		if (!position)
-			return false;
+			return (false);
 		current = position->value;
 		cursor = position->next;
 		while (cursor)
 		{
 			if (current == cursor->value)
-				return true;
+				return (true);
 			cursor = cursor->next;
 		}
 		position = position->next;
 	}
-	return false;
+	return (false);
 }
 
-long ft_atol(char *string)
+long	ft_atol(char *string)
 {
-	long negative;
-	long result;
+	long	negative;
+	long	result;
 
 	while (ft_isspace(*string) || *string == '-')
 		string++;
