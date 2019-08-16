@@ -62,8 +62,13 @@ int main(int argc, char **argv)
 			ft_appendelem(&stack_a, ft_atoi(argv[i++]));
 	container = ft_containstacks(&stack_a, &stack_b, true);
 	normalise(stack_a, argc - 1);
-	visualize_stacks(container);
+	container->v_actions = new_action(START);
+	
+	//visualize_stacks(container);
+	visi(container);
+	
 	return 0;
+
 	ft_runactions(&container);
 	if (ft_sorted(&stack_a, &stack_b))
 		ft_putstr(GRN "OK!\n" RESET);

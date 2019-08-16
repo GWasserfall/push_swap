@@ -140,6 +140,7 @@ int visualize_stacks(t_stacks *container)
 	int ret;
 	int count;
 
+	//initscr();
 	newterm(NULL, stderr, stdin);
 	curs_set(FALSE);
 	start_color();

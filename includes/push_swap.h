@@ -31,13 +31,25 @@ typedef struct		s_stack
 	struct s_stack	*next;
 }					t_stack;
 
+enum e_action
+{
+	PA, PB, RA, RB, RR, SA, SB, SS, RRA, RRB, RRR, START, INVALID
+};
+
+typedef struct		s_action
+{
+	struct s_action	*next;
+	struct s_action	*prev;
+	enum e_action	action;
+}					t_action;
+
 typedef struct		s_stacks 
 {
 	bool			is_checker;
+	t_action		*v_actions;
 	t_stack 		**a;
 	t_stack 		**b;
 }					t_stacks;
-
 
 typedef struct	s_moves
 {
@@ -48,31 +60,33 @@ typedef struct	s_moves
 }				t_moves;
 
 // actions_backend
-void	ft_swap(t_stack **stack);
-void	ft_rotate(t_stack **stack);
-void	ft_reverse(t_stack **stack);
-void	ft_push(t_stack **sender, t_stack **receiver);
+void			ft_swap(t_stack **stack);
+void			ft_rotate(t_stack **stack);
+void			ft_reverse(t_stack **stack);
+void			ft_push(t_stack **sender, t_stack **receiver);
 
 // actions
-void sa(t_stacks **stacks);
-void sb(t_stacks **stacks);
-void ss(t_stacks **stacks);
-void pa(t_stacks **stacks);
-void pb(t_stacks **stacks);
-void ra(t_stacks **stacks);
-void rb(t_stacks **stacks);
-void rr(t_stacks **stacks);
-void rra(t_stacks **stacks);
-void rrb(t_stacks **stacks);
-void rrr(t_stacks **stacks);
+void			sa(t_stacks **stacks);
+void			sb(t_stacks **stacks);
+void			ss(t_stacks **stacks);
+void			pa(t_stacks **stacks);
+void			pb(t_stacks **stacks);
+void			ra(t_stacks **stacks);
+void			rb(t_stacks **stacks);
+void			rr(t_stacks **stacks);
+void			rra(t_stacks **stacks);
+void			rrb(t_stacks **stacks);
+void			rrr(t_stacks **stacks);
 
 
+t_action	*new_action(enum e_action action);
+void	append_new_action(t_action **previous, enum e_action a);
 
 // debug
 void				db_printstacks(t_stack **a, t_stack **b);
 
-void largest_to_top(t_stacks **container);
-int slen(t_stack *stack);
+void				largest_to_top(t_stacks **container);
+int					slen(t_stack *stack);
 
 // stack
 bool				ft_appendelem(t_stack **stack, int value);
@@ -85,6 +99,8 @@ bool				ft_hasdupe(t_stack **stack);
 
 // push_swap
 t_stacks			*ft_containstacks(t_stack **a, t_stack **b, bool is_checker);
+
+int					visi(t_stacks *container);
 
 // alogos
 void				gsort(t_stacks **container, t_moves **moves, int a_max);

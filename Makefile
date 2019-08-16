@@ -10,7 +10,7 @@ push_swap:
 	@echo "push_swap OK!"
 
 checker:
-	@$(CC) ./visualizer.c ./checker.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o checker
+	@$(CC) ./visualiser2.c ./checker.c ./visual_actions.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o checker
 	@echo "checker OK!"
 
 randints:
