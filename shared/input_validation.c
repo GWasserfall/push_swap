@@ -47,7 +47,7 @@ bool	args_are_digits(int argc, char **argv)
 	int j;
 
 	i = 0;
-	while (i++ < argc)
+	while (++i < argc)
 	{
 		j = 0;
 		while (argv[i][j])

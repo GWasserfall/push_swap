@@ -68,7 +68,6 @@ void				rrr(t_stacks **stacks);
 t_action			*new_action(enum e_action action);
 void				append_new_action(t_action **previous, enum e_action a);
 
-void				largest_to_top(t_stacks **container);
 
 
 bool				ft_appendelem(t_stack **stack, int value);
@@ -81,27 +80,38 @@ t_stacks			*ft_containstacks(t_stack **a, t_stack **b, bool is_checker);
 int					visi(t_stacks *container);
 void				gsort(t_stacks **container, t_moves **moves, int a_max);
 
-
-
+void				destroy_stack(t_stack *head);
+int					cleanup(t_stacks *container);
 void				ft_sort_three(t_stacks **container);
-void				ft_slowsort(t_stacks **container);
-void				ft_gabbysort(t_stacks **container);
-void				ft_sort_four(t_stacks **container);
+
+
+
+
 void				ft_sort_five(t_stacks **container);
+
+
 void				ft_sort_two(t_stacks **container);
-void				flabbysort(t_stacks **container);
-void				slottysort(t_stacks **container);
+
+
 int					min_index(t_stack *stack);
 int					max_index(t_stack *stack);
+
 int					stack_is_long(t_stack *stack);
+
 int					get_value_at_index(t_stack **stack, int index);
-void				show_stack(t_stack *head);
+
+
 int					index_of(t_stack **stack, int number);
+
+
 int					stack_len(t_stack *stack);
+
 int					get_min(t_stack **stack);
-void				ft_midsplit(t_stacks **container);
+
+
 void				push_back_to_a(t_stacks **container);
-void				largest_to_top(t_stacks **container);
+
+
 void				ft_sort_three_b(t_stacks **container);
 long				ft_atol(char *string);
 bool				ft_single_sorted(t_stack *head);

@@ -1,26 +1,22 @@
 FLAGS = -Wall -Werror -Wextra -g
 
-all: depend randints push_swap checker
+all: depend random push_swap checker
 
 depend:
 	@make re -C libft
+	@echo "\033[4;32m== push_swap compiled ==\033[0m"
 
 push_swap:
-	@$(CC) -g ./push_swap.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -o push_swap
-	@echo "push_swap OK!"
+	$(CC) $(FLAGS) ./push_swap.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft ./helpers/*.c -o push_swap
+	@echo "\033[4;32m== push_swap compiled ==\033[0m"
 
 checker:
-	@$(CC) ./visualiser2.c ./checker.c ./visual_actions.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o checker
-	@echo "checker OK!"
-
-randints:
-	$(CC) randints.c libft/libft.a -I./libft -o random
+	$(CC) ./visualiser.c ./checker.c ./helpers/visual_actions.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o checker
+	@echo "\033[4;32m== checker compiled   ==\033[0m"
 
 random:
-	@echo `./randints $(c)`
-
-vs:
-	@$(CC) ./visualiser2.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o vs2
+	$(CC) random.c libft/libft.a -I./libft -o random
+	@echo "\033[4;32m== random compiled    ==\033[0m"
 
 fclean:
 	@$(RM) ./checker

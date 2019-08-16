@@ -64,6 +64,14 @@ int main(int argc, char **argv)
 	normalise(stack_a, argc - 1);
 	container->v_actions = new_action(START);
 	
+
+
+
+
+
+
+
+
 	//visualize_stacks(container);
 	visi(container);
 	
