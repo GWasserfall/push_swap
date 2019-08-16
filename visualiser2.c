@@ -55,28 +55,28 @@ void	draw_stackw(WINDOW *window, t_stack *stack, int dir)
 enum e_action get_action(char *str)
 {
 	if (!(ft_strcmp(str, "sa")))
-			return (SA);
-		else if (!(ft_strcmp(str, "sb")))
-			return (SB);
-		else if (!(ft_strcmp(str, "ss")))
-			return (SS);
-		else if (!(ft_strcmp(str, "pa")))
-			return (PA);
-		else if (!(ft_strcmp(str, "pb")))
-			return (PB);
-		else if (!(ft_strcmp(str, "ra")))
-			return (RA);
-		else if (!(ft_strcmp(str, "rb")))
-			return (RB);
-		else if (!(ft_strcmp(str, "rr")))
-			return (RR);
-		else if (!(ft_strcmp(str, "rra")))
-			return (RRA);
-		else if (!(ft_strcmp(str, "rrb")))
-			return (RRB);
-		else if (!(ft_strcmp(str, "rrr")))
-			return (RRR);
-		return (INVALID);
+		return (SA);
+	else if (!(ft_strcmp(str, "sb")))
+		return (SB);
+	else if (!(ft_strcmp(str, "ss")))
+		return (SS);
+	else if (!(ft_strcmp(str, "pa")))
+		return (PA);
+	else if (!(ft_strcmp(str, "pb")))
+		return (PB);
+	else if (!(ft_strcmp(str, "ra")))
+		return (RA);
+	else if (!(ft_strcmp(str, "rb")))
+		return (RB);
+	else if (!(ft_strcmp(str, "rr")))
+		return (RR);
+	else if (!(ft_strcmp(str, "rra")))
+		return (RRA);
+	else if (!(ft_strcmp(str, "rrb")))
+		return (RRB);
+	else if (!(ft_strcmp(str, "rrr")))
+		return (RRR);
+	return (INVALID);
 }
 
 void collect_actions(t_stacks *container)
@@ -225,7 +225,7 @@ void print_actions(WINDOW *win, t_action *position)
 
 	back = position->prev;
 	forward = position->next;
-	wclear(win);
+	werase(win);
 
 	while (forward)
 	{
@@ -253,8 +253,8 @@ void print_actions(WINDOW *win, t_action *position)
 
 void clear_stacks(WINDOW *left, WINDOW *right)
 {
-	wclear(left);
-	wclear(right);
+	werase(left);
+	werase(right);
 	box(left, 0, 0);
 	box(right, 0, 0);
 }
@@ -312,14 +312,13 @@ int visi(t_stacks *container)
 
 	while (1)
 	{
-		input = getch();
+		input = wgetch(stdscr);
 		if (input == KEY_LEFT)
 			reverse_action(&container);
 		else if (input == KEY_RIGHT)
 			advance_action(&container);
 		else if (input == 'q')
 			break;
-
 		clear_stacks(leftw, rightw);
 		print_actions(middlew, container->v_actions);
 		draw_stackw(leftw, *(container->a), TRUE);

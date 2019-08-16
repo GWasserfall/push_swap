@@ -134,7 +134,7 @@ void ft_sort_three_b(t_stacks **container);
 long				ft_atol(char *string);
 
 bool ft_single_sorted(t_stack *head);
-void	ft_sort_below_thirty(t_stacks **container);
+void	ft_sort_below_five(t_stacks **container);
 
 
 int len_from_start(t_stack *head, t_stack *item);

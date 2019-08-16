@@ -43,7 +43,7 @@ void	push_smallest_to_b(t_stacks **container)
 	}
 }
 
-void	ft_sort_below_thirty(t_stacks **container)
+void	ft_sort_five(t_stacks **container)
 {
 	t_stacks *stacks = *container;
 	t_stack *a = *(stacks->a);

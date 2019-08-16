@@ -63,9 +63,10 @@ bool	preflight(int argc, char **argv)
 {
 	if (argc > 1)
 	{
-		if (argc == 2)
+		if (argc == 2 && !(args_are_digits(argc, argv)))
 		{
-			ft_putstr(RED "Error!" RESET "  (Each digit should be an argument)\n");
+			ft_putstr("\nInfo: push_swap does not support a single argument that is not a digit.");
+			ft_putstr(" If you are using zsh please expannd args using ${=ARG}\n");
 			return (false);
 		}
 		if (!(args_are_digits(argc, argv)))

@@ -81,6 +81,8 @@ void	run_algorithm(int count, t_stacks **container)
 		ft_sort_two(container);
 	else if (count == 3)
 		ft_sort_three(container);
+	else if (count < 6)
+		ft_sort_five(container);
 	else
 	{
 		moves = (t_moves *)malloc(sizeof(t_moves));

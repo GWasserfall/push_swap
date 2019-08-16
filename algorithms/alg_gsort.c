@@ -41,15 +41,65 @@ int closest_higher_index(t_stack *stack, int index)
 
 	i = max_index(stack);
 	min = min_index(stack);
+
 	stack = stack->next;
 	while (stack)
 	{
-		if (stack->index < i && i > min)
+		//printf("%d < %d && %d > %d\n", stack->index, i, i + 1, min);
+		if (stack->index < i && stack->index > min)
 			i = stack->index;
 		stack = stack->next;
 	}
 	return i;
 }
+
+void ft_reversesort_three(t_stacks **container, t_stack *stack)
+{
+	int first;
+	int second;
+	int third;
+
+	stack = stack->next;
+	first = stack->index;
+	second = stack->next->index;
+	third = stack->next->next->index;
+
+	if (first > second && second < third && third > first)
+		rrb(container);
+	else if (first > second && second < third)
+	{
+			rrb(container);
+			sb(container);
+	}
+	else if (first < second && second < third)
+	{
+		rb(container);
+		sb(container);
+	}
+}
+
+
+int b_not_sorted(t_stacks **container)
+{
+	t_stack *b = (*(*container)->b);
+	int min = min_index(b);
+	int max = max_index(b);
+
+	b = b->next;
+	while (b)
+	{	
+		if (b->next)
+		{
+			if ((b->index < b->next->index) && b->index != min)
+			{
+				return (1);
+			}
+		}
+		b = b->next;
+	}
+	return 0;
+}
+
 
 int move_count(t_stack *stack, int norm)
 {
@@ -71,9 +121,15 @@ int move_count(t_stack *stack, int norm)
 	if (norm > max && start == max)
 		return (0);
 	if (norm < min)
-		next = closest_higher_index(stack, norm);
+	{
+		//next = closest_higher_index(stack, min);
+		next = max;
+		// printf("passing %d to closest index\n", min);
+		// printf("This value == %d, min on stack B is %d, next should be %d\n", norm, min, next);
+	}
 	while (stack)
 	{
+		//printf("\t %d\n", stack->index);
 		if (stack->index == next)
 			break;
 		count++;
@@ -105,7 +161,7 @@ void	best_move(t_moves **move, t_stack *a, t_stack *b, int max)
 	m = *move;
 	a = a->next;
 
-	m->total = 100;
+	m->total = INT_MAX;
 
 	position = 0;	
 	while (a)
@@ -132,7 +188,8 @@ void	best_move(t_moves **move, t_stack *a, t_stack *b, int max)
 			m->b_moves = bmoves;
 			m->total = total;
 		}
-
+		//index : 363, amoves : 0, bmoves : 0, total : 100
+		//printf("index : %d, amoves : %d, bmoves : %d, total : %d\n", a->index, m->a_moves, m->b_moves, m->total);
 		position++;
 		a = a->next;
 	}
@@ -192,7 +249,7 @@ void ft_initial_push(t_stacks **container, int max)
 	count = 0;
 	while (count < 3)
 	{
-		if (a->next->index >= max - 3)
+		if (a->next->index > max - 3)
 			ra(container);
 		else
 		{
@@ -200,6 +257,42 @@ void ft_initial_push(t_stacks **container, int max)
 			count++;
 		}
 	}
+	ft_reversesort_three(container, (*(*container)->b));
+}
+
+void outstacks(t_stacks **container)
+{
+	t_stack *a;
+	t_stack *b;
+
+	a = (*(*container)->a);
+	b = (*(*container)->b);
+
+	a = a->next;
+	b = b->next;
+
+	printf("    a                    b\n");
+
+	while (a || b)
+	{
+		if (a)
+		{
+			printf("   %d        ", a->index);
+			a = a->next;
+		}
+		else
+		{
+			printf("            ");
+		}
+		
+		if (b)
+		{
+			printf("      %d ", b->index);
+			b = b->next;
+		}
+		printf("\n");
+	}
+	printf("\n");
 }
 
 void gsort(t_stacks **container, t_moves **moves, int a_max)
@@ -213,6 +306,14 @@ void gsort(t_stacks **container, t_moves **moves, int a_max)
 	while (a->next && !(stack_is_long(a) == 3))
 	{
 		best_move(moves, a, b, a_max);
+		//if (b_not_sorted(container))
+		// if (b->next->index == 145)
+		// {
+		// 	printf("A Moves : %d \t B Moves : %d\n", (*moves)->a_moves, (*moves)->b_moves);
+		// 	outstacks(container);
+		// 	getchar();
+		// }
+		
 		while ((*moves)->a_moves || (*moves)->b_moves)
 		{
 			if ((*moves)->b_moves > 0 && (*moves)->a_moves > 0)
