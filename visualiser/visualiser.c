@@ -32,7 +32,6 @@ void	wprint_row(WINDOW *win, t_stack *current, int row, int dir)
 	wattroff(win, COLOR_PAIR(3));
 	wattroff(win, COLOR_PAIR(2));
 	mvwprintw(win, row, i + 1, "[%.2d]", current->index);
-
 }
 
 
@@ -89,48 +88,35 @@ void collect_actions(t_stacks *container)
 	free(line);
 }
 
-void act_reverse(t_stacks **container, enum e_action action)
+
+
+
+void	act_forward(t_stacks **container, t_action *position)
 {
-	if (action == PA)
-		pb(container);
-	if (action == PB)
+	if (position->action == PA)
 		pa(container);
-	if (action == RA)
-		rra(container);
-	if (action == RB)
-		rrb(container);
-	if (action == RR)
-		rrr(container);
-	if (action == SA)
-		sa(container);
-	if (action == SB)
-		sb(container);
-	if (action == SS)
-		ss(container);
-	if (action == RRA)
+	else if (position->action == PB)
+		pb(container);
+	else if (position->action == RA)
 		ra(container);
-	if (action == RRB)
+	else if (position->action == RB)
 		rb(container);
-	if (action == RRR)
+	else if (position->action == RR)
 		rr(container);
+	else if (position->action == SA)
+		sa(container);
+	else if (position->action == SB)
+		sb(container);
+	else if (position->action == SS)
+		ss(container);
+	else if (position->action == RRA)
+		rra(container);
+	else if (position->action == RRB)
+		rrb(container);
+	else if (position->action == RRR)
+		rrr(container);
 }
 
-
-void reverse_action(t_stacks **container)
-{
-	t_action *position;
-	position = (*container)->v_actions;
-
-	if (!position->prev)
-		return ;
-
-	if (position)
-	{
-		act_reverse(container, position->action);
-		
-		(*container)->v_actions = position->prev;
-	}
-}
 
 
 void advance_action(t_stacks **container)
@@ -140,60 +126,9 @@ void advance_action(t_stacks **container)
 
 	if (position)
 	{
-		if (position->action == PA)
-			pa(container);
-		else if (position->action == PB)
-			pb(container);
-		else if (position->action == RA)
-			ra(container);
-		else if (position->action == RB)
-			rb(container);
-		else if (position->action == RR)
-			rr(container);
-		else if (position->action == SA)
-			sa(container);
-		else if (position->action == SB)
-			sb(container);
-		else if (position->action == SS)
-			ss(container);
-		else if (position->action == RRA)
-			rra(container);
-		else if (position->action == RRB)
-			rrb(container);
-		else if (position->action == RRR)
-			rrr(container);
+		act_forward(container, position);
 		(*container)->v_actions = position;
 	}
-}
-
-void p_action(WINDOW *win, enum e_action action, int row)
-{
-	if (action == PA)
-		mvwprintw(win, row, 6, " pa ");
-	else if (action == PB)
-		mvwprintw(win, row, 6, " pb ");
-	else if (action == SA)
-		mvwprintw(win, row, 6, " sa ");
-	else if (action == SB)
-		mvwprintw(win, row, 6, " sb ");
-	else if (action == SS)
-		mvwprintw(win, row, 6, " ss ");
-	else if (action == RA)
-		mvwprintw(win, row, 6, " ra ");
-	else if (action == RB)
-		mvwprintw(win, row, 6, " rb ");
-	else if (action == RR)
-		mvwprintw(win, row, 6, " rr ");
-	else if (action == RRA)
-		mvwprintw(win, row, 6, " rra ");
-	else if (action == RRB)
-		mvwprintw(win, row, 6, " rrb ");
-	else if (action == RRR)
-		mvwprintw(win, row, 6, " rrr ");
-	else if (action == INVALID)
-		mvwprintw(win, row, 5, " INVLD ");
-	else if (action == START)
-		mvwprintw(win, row, 5, " START ");
 }
 
 int count_actions(t_action *current)
@@ -209,44 +144,22 @@ int count_actions(t_action *current)
 	return i;
 }
 
-
 void print_actions(WINDOW *win, t_action *position)
 {
 	int up;
 	int down;
 	int middle;
-
-	t_action *back;
-	t_action *forward;
+	int moves;
 
 	middle = LINES / 2;
-	up = middle - 1;
-	down = middle + 1;
-
-	back = position->prev;
-	forward = position->next;
 	werase(win);
-
-	while (forward)
-	{
-		p_action(win, forward->action, down++);
-		forward = forward->next;
-	}
-
+	print_actions_down(win, position->next, middle + 1);;
 	wattron(win, COLOR_PAIR(4));
 	p_action(win, position->action, middle);
 	wattroff(win, COLOR_PAIR(4));
-
-	while (back && up > 2)
-	{
-		p_action(win, back->action, up--);
-		back = back->prev;
-	}
-	
-
-	int moves = count_actions(position);
+	print_actions_up(win, position->prev, middle - 1);
+	moves = count_actions(position);
 	mvwprintw(win, 0, 8 - ft_intlen(moves) / 2, "%d", moves);
-
 	wrefresh(win);
 }
 
@@ -267,6 +180,8 @@ int visi(t_stacks *container)
 	WINDOW	*leftw;
 	WINDOW	*middlew;
 
+	int		interactive;
+
 	set_term(screen);
 	curs_set(0);
 	start_color();
@@ -276,18 +191,21 @@ int visi(t_stacks *container)
 	init_pair(3, COLOR_BLACK, COLOR_GREEN);
 	init_pair(4, COLOR_BLACK, COLOR_WHITE);
 
+	interactive = 0;
 	if (!isatty(0))
 	{	
 		collect_actions(container);
 	}
-
-	int height = 10;
-    int width = 40;
-    int srtheight = 1;
-    int srtwidth = 1;
+	else
+	{
+		// Interactive Mode
+		interactive = 1;
+	}
 
 	int sizel = (COLS / 2 - 10) / 2;
 	int sizer = COLS - sizel;
+
+	noecho();
 
     mvprintw(0, sizel, "STACK A");
     mvprintw(0, sizer, "STACK B");
@@ -308,10 +226,10 @@ int visi(t_stacks *container)
 	draw_stackw(leftw, *(container->a), TRUE);
 	draw_stackw(rightw, *(container->b), FALSE);	
 	
-	noecho();
 
 	while (1)
 	{
+		char *act;
 		input = wgetch(stdscr);
 		if (input == KEY_LEFT)
 			reverse_action(&container);
@@ -319,6 +237,14 @@ int visi(t_stacks *container)
 			advance_action(&container);
 		else if (input == 'q')
 			break;
+		else if (input == 'a')
+		{
+			getstr(act);
+			append_new_action(&(container->v_actions), get_action(act));
+
+		}
+
+
 		clear_stacks(leftw, rightw);
 		print_actions(middlew, container->v_actions);
 		draw_stackw(leftw, *(container->a), TRUE);

@@ -5,6 +5,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <libft.h>
+# include <ncurses.h>
 # include <limits.h>
 # include <stdbool.h>
 # define RED   "\x1B[31m"
@@ -84,7 +85,9 @@ void				destroy_stack(t_stack *head);
 int					cleanup(t_stacks *container);
 void				ft_sort_three(t_stacks **container);
 
-
+void				print_actions_down(WINDOW *win, t_action *action, int pos);
+void				print_actions_up(WINDOW *win, t_action *action, int pos);
+void				p_action(WINDOW *win, enum e_action action, int row);
 
 
 void				ft_sort_five(t_stacks **container);
@@ -108,6 +111,9 @@ int					stack_len(t_stack *stack);
 
 int					get_min(t_stack **stack);
 
+
+void				reverse_action(t_stacks **container);
+void				act_reverse(t_stacks **container, enum e_action action);
 
 void				push_back_to_a(t_stacks **container);
 
