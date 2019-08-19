@@ -98,10 +98,13 @@ bool	valid_flags(int argc, char **argv)
 	{
 		if (argv[i][0] == '-' && ft_strlen((const char *)argv[i]) > 1)
 		{
-			ft_putstr("Error: Invalid option : [");
-			ft_putchar(argv[i][1]);
-			ft_putstr("]\n");
-			return (false);
+			if (argv[i][1] != 'v')
+			{
+				ft_putstr("Error: Invalid option : [");
+				ft_putchar(argv[i][1]);
+				ft_putstr("]\n");
+				return (false);
+			}
 		}
 		if (argv[i][0] == '-' && ft_strlen((const char *)argv[i]) == 1)
 		{
