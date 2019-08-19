@@ -36,25 +36,29 @@ int closest_lower_index(t_stack *stack, int index)
 
 void ft_reversesort_three(t_stacks **container, t_stack *stack)
 {
-	int first;
-	int second;
-	int third;
+	int a;
+	int b;
+	int c;
 
 	stack = stack->next;
-	first = stack->index;
-	second = stack->next->index;
-	third = stack->next->next->index;
+	a = stack->index;
+	b = stack->next->index;
+	c = stack->next->next->index;
 
-	if (first > second && second < third && third > first)
-		rrb(container);
-	else if (first > second && second < third)
-	{
-			rrb(container);
-			sb(container);
-	}
-	else if (first < second && second < third)
+	if (a < b && b < c && c > a)
 	{
 		rb(container);
+		sb(container);
+	}
+	else if (a < b && b > c && c > a)
+		rb(container);
+	else if (a < b && b > c && c < a)
+		sb(container);
+	else if (a > b && b < c && c > a)
+		rrb(container);
+	else if (a > b && b < c && c < a)
+	{
+		rrb(container);
 		sb(container);
 	}
 }

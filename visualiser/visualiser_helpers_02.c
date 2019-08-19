@@ -26,7 +26,6 @@ void act_reverse(t_stacks **container, enum e_action action)
 		rr(container);
 }
 
-
 void reverse_action(t_stacks **container)
 {
 	t_action *position;
@@ -41,4 +40,41 @@ void reverse_action(t_stacks **container)
 		
 		(*container)->v_actions = position->prev;
 	}
+}
+
+enum e_action get_action(char *str)
+{
+	if (!(ft_strcmp(str, "sa")))
+		return (SA);
+	else if (!(ft_strcmp(str, "sb")))
+		return (SB);
+	else if (!(ft_strcmp(str, "ss")))
+		return (SS);
+	else if (!(ft_strcmp(str, "pa")))
+		return (PA);
+	else if (!(ft_strcmp(str, "pb")))
+		return (PB);
+	else if (!(ft_strcmp(str, "ra")))
+		return (RA);
+	else if (!(ft_strcmp(str, "rb")))
+		return (RB);
+	else if (!(ft_strcmp(str, "rr")))
+		return (RR);
+	else if (!(ft_strcmp(str, "rra")))
+		return (RRA);
+	else if (!(ft_strcmp(str, "rrb")))
+		return (RRB);
+	else if (!(ft_strcmp(str, "rrr")))
+		return (RRR);
+	return (INVALID);
+}
+
+void collect_actions(t_stacks *container)
+{
+	int ret;
+	char *line;
+	line = malloc(1);
+	while ((ret = get_next_line(0, &line)) > 0)
+		append_new_action(&(container->v_actions), get_action(line));
+	free(line);
 }

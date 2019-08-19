@@ -25,8 +25,6 @@ void p_action(WINDOW *win, enum e_action action, int row)
 		mvwprintw(win, row, 6, " rrb ");
 	else if (action == RRR)
 		mvwprintw(win, row, 6, " rrr ");
-	else if (action == INVALID)
-		mvwprintw(win, row, 5, " INVLD ");
 	else if (action == START)
 		mvwprintw(win, row, 5, " START ");
 }

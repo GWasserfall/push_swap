@@ -11,11 +11,11 @@ push_swap:
 	@echo "\033[4;32m== push_swap compiled ==\033[0m"
 
 checker:
-	$(CC) ./visualiser/*.c ./checker.c ./helpers/visual_actions.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o checker
+	$(CC) $(FLAGS) ./visualiser/*.c ./checker.c ./helpers/visual_actions.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o checker
 	@echo "\033[4;32m== checker compiled   ==\033[0m"
 
 random:
-	$(CC) random.c libft/libft.a -I./libft -o random
+	$(CC) $(FLAGS) random.c libft/libft.a -I./libft -o random
 	@echo "\033[4;32m== random compiled    ==\033[0m"
 
 fclean:

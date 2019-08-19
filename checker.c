@@ -44,43 +44,65 @@ void	ft_runactions(t_stacks **container)
 	}
 }
 
-int main(int argc, char **argv)
+void	collect_options(int ac, char **av, t_stacks *container)
+{
+	int i;
+
+	i = 1;
+	while (i < ac)
+	{
+		if (av[i][0] == '-' && av[i][1] == 'v')
+			container->visualise = true;
+		i++;
+	}
+}
+
+int		check_sorted(t_stacks *container)
+{
+	t_stack		*stack_a;
+	t_stack		*stack_b;
+
+	stack_a = *(container->a);
+	stack_b = *(container->a);
+
+	ft_runactions(&container);
+	if (ft_sorted(&stack_a, &stack_b))
+	{
+		ft_putstr(GRN "OK\n" RESET);
+		return (0);
+	}
+	else
+	{
+		ft_putstr(RED "KO\n" RESET);
+		return (1);
+	}
+}	
+
+int		main(int argc, char **argv)
 {
 	t_stack		*stack_a;
 	t_stack		*stack_b;
 	t_stacks	*container;
 	int			i;
-	int			visualize;
 
 	if (!(preflight(argc, argv)))
 		return 1;
 	i = 1;
 	stack_a = ft_stackinit();
 	stack_b = ft_stackinit();
-	if (argc > 1)
-		while (i < argc)
-			ft_appendelem(&stack_a, ft_atoi(argv[i++]));
+	while (i < argc)
+		ft_appendelem(&stack_a, ft_atoi(argv[i++]));
 	container = ft_containstacks(&stack_a, &stack_b, true);
 	normalise(stack_a, argc - 1);
 	container->v_actions = new_action(START);
+	collect_options(argc, argv, container);
+	// if (container->visualise)
+	// {
+	return visi(container);
+	// }
+	// else
+	// {
+	// 	return check_sorted(container);
+	// }
 	
-
-
-
-
-
-
-
-
-	//visualize_stacks(container);
-	visi(container);
-	
-	return 0;
-
-	ft_runactions(&container);
-	if (ft_sorted(&stack_a, &stack_b))
-		ft_putstr(GRN "OK!\n" RESET);
-	else
-		ft_putstr(RED "KO!\n" RESET);
-	return (0);
 }

@@ -68,6 +68,8 @@ t_stacks	*ft_containstacks(t_stack **a, t_stack **b, bool is_checker)
 	container->a = a;
 	container->b = b;
 	container->is_checker = is_checker;
+	container->visualise = false;
+	container->v_actions = NULL;
 
 	return (container);
 }
@@ -94,7 +96,7 @@ bool ft_appendelem(t_stack **stack, int value)
 	t_stack *new_elem;
 
 	cursor = *stack;
-
+	printf("Appending %d\n", value);
 	if ((new_elem = ft_newelem(value)))
 	{
 		while (cursor->next)
