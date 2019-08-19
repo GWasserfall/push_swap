@@ -90,7 +90,31 @@ bool	more_than_one_arg(int argc, char **argv)
 	return (true);
 }
 
-bool	preflight(int argc, char **argv)
+bool	valid_flags(int argc, char **argv)
+{
+	int i = 1;
+
+	while (i < argc)
+	{
+		if (argv[i][0] == '-' && ft_strlen((const char *)argv[i]) > 1)
+		{
+			ft_putstr("Error: Invalid option : [");
+			ft_putchar(argv[i][1]);
+			ft_putstr("]\n");
+			return (false);
+		}
+		if (argv[i][0] == '-' && ft_strlen((const char *)argv[i]) == 1)
+		{
+			ft_putstr("Error: Invalid option : [-]\n");
+			return (false);
+		}
+		
+		i++;
+	}
+	return (true);
+}
+
+bool	checker_preflight(int argc, char **argv)
 {
 	if (!(more_than_one_arg(argc, argv)))
 		return (false);
@@ -99,6 +123,23 @@ bool	preflight(int argc, char **argv)
 	if (!(args_are_digits(argc, argv)))
 		return (false);
 	if (!(args_fit_int(argc, argv)))
+		return (false);
+	if (!(valid_flags(argc, argv)))
+		return (false);
+	return (true);
+}
+
+bool	pushswap_preflight(int argc, char **argv)
+{
+	if (!(more_than_one_arg(argc, argv)))
+		return (false);
+	if (argc == 2 && !single_arg_is_valid(argc, argv))
+		return (false);
+	if (!(args_are_digits(argc, argv)))
+		return (false);
+	if (!(args_fit_int(argc, argv)))
+		return (false);
+	if (!(valid_flags(argc, argv)))
 		return (false);
 	return (true);
 }

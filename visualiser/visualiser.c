@@ -124,6 +124,9 @@ void clear_stacks(WINDOW *left, WINDOW *right)
 	box(right, 0, 0);
 }
 
+
+
+
 t_vstate *initialise()
 {
 	FILE		*f;
@@ -131,9 +134,13 @@ t_vstate *initialise()
 
 	if (!(state = (t_vstate *)malloc(sizeof(t_vstate))))
 		return (NULL);
-	f = fopen("/dev/tty", "r+");
-	state->screen = newterm(NULL, f, f);
-	set_term(state->screen);
+	state->tty = isatty(0);
+	if (state->tty)
+	{
+		f = fopen("/dev/tty", "r+");
+		state->screen = newterm(NULL, f, f);
+		set_term(state->screen);
+	}
 	start_color();
 	init_pair(2, COLOR_WHITE, COLOR_RED);
 	init_pair(3, COLOR_BLACK, COLOR_GREEN);

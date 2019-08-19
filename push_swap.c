@@ -48,7 +48,7 @@ int		main(int argc, char **argv)
 	int			i;
 
 	i = 1;
-	if (!(preflight(argc, argv)))
+	if (!(pushswap_preflight(argc, argv)))
 		return (print_usage(argv[0]));
 	stack_a = ft_stackinit();
 	stack_b = ft_stackinit();

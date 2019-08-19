@@ -85,24 +85,23 @@ int		main(int argc, char **argv)
 	t_stacks	*container;
 	int			i;
 
-	if (!(preflight(argc, argv)))
+	if (!(checker_preflight(argc, argv)))
 		return 1;
-	i = 1;
+	i = 0;
 	stack_a = ft_stackinit();
 	stack_b = ft_stackinit();
-	while (i < argc)
-		ft_appendelem(&stack_a, ft_atoi(argv[i++]));
+	while (++i < argc)
+	{
+		if (argv[i][0] != '-')
+			ft_appendelem(&stack_a, ft_atoi(argv[i]));
+
+	}
 	container = ft_containstacks(&stack_a, &stack_b, true);
-	normalise(stack_a, argc - 1);
+	normalise(stack_a, stack_is_long(stack_a));
 	container->v_actions = new_action(START);
 	collect_options(argc, argv, container);
-	// if (container->visualise)
-	// {
-	return visi(container);
-	// }
-	// else
-	// {
-	// 	return check_sorted(container);
-	// }
-	
+	if (container->visualise)
+		return visi(container);
+	else
+		return check_sorted(container);	
 }

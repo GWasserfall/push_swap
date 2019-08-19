@@ -96,7 +96,6 @@ bool ft_appendelem(t_stack **stack, int value)
 	t_stack *new_elem;
 
 	cursor = *stack;
-	printf("Appending %d\n", value);
 	if ((new_elem = ft_newelem(value)))
 	{
 		while (cursor->next)
