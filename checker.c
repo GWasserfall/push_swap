@@ -64,7 +64,7 @@ int		check_sorted(t_stacks *container)
 
 	stack_a = *(container->a);
 	stack_b = *(container->a);
-
+	
 	ft_runactions(&container);
 	if (ft_sorted(&stack_a, &stack_b))
 	{
@@ -94,7 +94,6 @@ int		main(int argc, char **argv)
 	{
 		if (argv[i][0] != '-')
 			ft_appendelem(&stack_a, ft_atoi(argv[i]));
-
 	}
 	container = ft_containstacks(&stack_a, &stack_b, true);
 	normalise(stack_a, stack_is_long(stack_a));

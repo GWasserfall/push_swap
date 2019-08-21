@@ -134,20 +134,23 @@ t_vstate *initialise()
 
 	if (!(state = (t_vstate *)malloc(sizeof(t_vstate))))
 		return (NULL);
-	state->tty = isatty(0);
-	if (state->tty)
+	state->interactive = isatty(0);
+	if (!state->interactive)
 	{
 		f = fopen("/dev/tty", "r+");
 		state->screen = newterm(NULL, f, f);
-		set_term(state->screen);
 	}
+	elseasd
+	{
+		state->screen = newterm(NULL, stderr, stdin);
+	}
+	set_term(state->screen);
 	start_color();
 	init_pair(2, COLOR_WHITE, COLOR_RED);
 	init_pair(3, COLOR_BLACK, COLOR_GREEN);
 	init_pair(4, COLOR_BLACK, COLOR_WHITE);
 	curs_set(0);
 	noecho();
-	state->interactive = isatty(0);
 	state->rightw = newwin(HEIGHT(LINES), (COLS / 2 - 8), 1, RMID(COLS));
 	state->leftw = newwin(HEIGHT(LINES), LMID(COLS), 1, 0);
 	state->middlew = newwin(HEIGHT(LINES), 16, 1, COLS / 2 - 8);
@@ -195,6 +198,7 @@ void animation_loop(t_vstate *state, t_stacks *container, char **act)
 		print_actions(state->middlew, container->v_actions);
 		draw_stackw(state->leftw, *(container->a), TRUE);
 		draw_stackw(state->rightw, *(container->b), FALSE);
+		refresh();
 	}
 }
 

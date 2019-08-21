@@ -26,18 +26,17 @@ void normalise(t_stack *stacka, int count)
 
 bool ft_sorted(t_stack **stack, t_stack **helper)
 {
+	t_stack *start = (*stack)->next;
+	
 	if ((*helper)->next)
 		return false;
-	t_stack *start = (*stack)->next;
 	while (start)
 	{
+		ft_putstr("Tom Sick and Harry\n");
 		if (!start->next)
 			return true;
 		if (start->value < start->next->value)
-		{
 			start = start->next;
-			continue;
-		}
 		else
 			return false;		
 	}
