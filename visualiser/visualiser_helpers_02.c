@@ -78,3 +78,29 @@ void collect_actions(t_stacks *container)
 		append_new_action(&(container->v_actions), get_action(line));
 	free(line);
 }
+
+void	act_forward(t_stacks **container, t_action *position)
+{
+	if (position->action == PA)
+		pa(container);
+	else if (position->action == PB)
+		pb(container);
+	else if (position->action == RA)
+		ra(container);
+	else if (position->action == RB)
+		rb(container);
+	else if (position->action == RR)
+		rr(container);
+	else if (position->action == SA)
+		sa(container);
+	else if (position->action == SB)
+		sb(container);
+	else if (position->action == SS)
+		ss(container);
+	else if (position->action == RRA)
+		rra(container);
+	else if (position->action == RRB)
+		rrb(container);
+	else if (position->action == RRR)
+		rrr(container);
+}

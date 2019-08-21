@@ -12,56 +12,7 @@
 
 #include <push_swap.h>
 
-int end_index(t_stack *stack)
-{
-	while (stack->next)
-		stack = stack->next;
-	return (stack->index);
-}
 
-int closest_lower_index(t_stack *stack, int index)
-{
-	int i;
-
-	i = 0;
-	stack = stack->next;
-	while (stack)
-	{
-		if (stack->index > i && stack->index < index)
-			i = stack->index;
-		stack = stack->next;
-	}
-	return i;
-}
-
-void ft_reversesort_three(t_stacks **container, t_stack *stack)
-{
-	int a;
-	int b;
-	int c;
-
-	stack = stack->next;
-	a = stack->index;
-	b = stack->next->index;
-	c = stack->next->next->index;
-
-	if (a < b && b < c && c > a)
-	{
-		rb(container);
-		sb(container);
-	}
-	else if (a < b && b > c && c > a)
-		rb(container);
-	else if (a < b && b > c && c < a)
-		sb(container);
-	else if (a > b && b < c && c > a)
-		rrb(container);
-	else if (a > b && b < c && c < a)
-	{
-		rrb(container);
-		sb(container);
-	}
-}
 
 
 int b_not_sorted(t_stacks **container)
@@ -167,71 +118,6 @@ void	best_move(t_moves **move, t_stack *a, t_stack *b)
 		position++;
 		a = a->next;
 	}
-}
-
-void ft_rotate_a(t_stacks **container, t_moves **moves)
-{
-	if ((*moves)->a_moves > 0)
-	{
-		ra(container);
-		(*moves)->a_moves--;
-	}
-	else
-	{
-		rra(container);
-		(*moves)->a_moves++;
-	}
-}
-
-void ft_dblrotate(t_stacks **container, t_moves **moves, int direction)
-{
-	if (direction  > 0)
-	{
-		rr(container);
-		(*moves)->a_moves--;
-		(*moves)->b_moves--;
-	}
-	else
-	{
-		rrr(container);
-		(*moves)->a_moves++;
-		(*moves)->b_moves++;
-	}
-}
-
-void ft_rotate_b(t_stacks **container, t_moves **moves)
-{
-	if ((*moves)->b_moves > 0)
-	{
-		rb(container);
-		(*moves)->b_moves--;
-	}
-	else
-	{
-		rrb(container);
-		(*moves)->b_moves++;
-	}
-}
-
-
-void ft_initial_push(t_stacks **container, int max)
-{
-	int count;
-	t_stack *a;
-
-	a = (*(*container)->a);
-	count = 0;
-	while (count < 3)
-	{
-		if (a->next->index > max - 3)
-			ra(container);
-		else
-		{
-			pb(container);
-			count++;
-		}
-	}
-	ft_reversesort_three(container, (*(*container)->b));
 }
 
 void gsort(t_stacks **container, t_moves **moves, int a_max)

@@ -12,10 +12,10 @@ def is_function(line):
 		return False
 	if ('\t') in line:
 
-		return line.split("\t")[0] in ['int', 'char', 'bool', 't_', 'void', 'long']
+		return line.split("\t")[0] in ['int', 'char', 'bool', 't_', 'void', 'long', 'enum']
 	else:
 
-		return line.split(" ")[0] in ['int', 'char', 'bool', 't_', 'void', 'long']
+		return line.split(" ")[0] in ['int', 'char', 'bool', 't_', 'void', 'long', 'enum']
 
 def count_functions(path):
 	count = 0

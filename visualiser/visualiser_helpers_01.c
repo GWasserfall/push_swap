@@ -46,3 +46,45 @@ void print_actions_up(WINDOW *win, t_action *action, int pos)
 		action = action->prev;
 	}
 }
+
+void	wprint_row(WINDOW *win, t_stack *current, int row, int dir)
+{
+	int i;
+
+	i = 1;
+	if (dir == 1)
+	{
+		if (current->next && current->index > current->next->index)
+			wattron(win, COLOR_PAIR(2));
+		else
+			wattron(win, COLOR_PAIR(3));
+	}
+	else
+	{
+		if (current->next && current->index < current->next->index)
+			wattron(win, COLOR_PAIR(2));
+		else
+			wattron(win, COLOR_PAIR(3));
+	}
+	while (i <= current->index)
+		mvwprintw(win, row, i++, " ");
+	wattroff(win, COLOR_PAIR(3));
+	wattroff(win, COLOR_PAIR(2));
+	mvwprintw(win, row, i + 1, "[%.2d]", current->index);
+}
+
+
+void	draw_stackw(WINDOW *window, t_stack *stack, int dir)
+{
+	int row;
+
+	stack = stack->next;
+	row = 1;
+	while (stack)
+	{
+		wprint_row(window, stack, row, dir);
+		row++;
+		stack = stack->next;
+	}
+    wrefresh(window);
+}

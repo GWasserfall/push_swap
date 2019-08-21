@@ -29,7 +29,7 @@ bool	ft_act(t_stacks **container, char *str)
 		return (true);
 }
 
-void	ft_runactions(t_stacks **container)
+bool	ft_runactions(t_stacks **container)
 {
 	char *line;
 	int ret;
@@ -38,9 +38,14 @@ void	ft_runactions(t_stacks **container)
 	while ((ret = get_next_line(0, &line)) > 0)
 	{	if (!(ft_act(container, line)))
 		{
+			ft_putstr(RED "Error" RESET " : (Invalid action [");
+			ft_putstr(line);
+			ft_putstr("])\n");
 			free(line);
+			return (false);
 		}
 	}
+	return (true);
 }
 
 void	collect_options(int ac, char **av, t_stacks *container)
@@ -64,7 +69,8 @@ int		check_sorted(t_stacks *container)
 	stack_a = *(container->a);
 	stack_b = *(container->b);
 	
-	ft_runactions(&container);
+	if (!ft_runactions(&container))
+		return (1);
 	if (ft_sorted(&stack_a, &stack_b))
 	{
 		ft_putstr(GRN "OK\n" RESET);
@@ -76,6 +82,13 @@ int		check_sorted(t_stacks *container)
 		return (1);
 	}
 }	
+
+int		duplicate_error()
+{
+	ft_putstr(RED "Error : " RESET);
+	ft_putstr("(Duplicates found)\n");
+	return (1);
+}
 
 int		main(int argc, char **argv)
 {
@@ -94,6 +107,8 @@ int		main(int argc, char **argv)
 		if (argv[i][0] != '-')
 			ft_appendelem(&stack_a, ft_atoi(argv[i]));
 	}
+	if (ft_hasdupe(&stack_a))
+		return (duplicate_error());
 	container = ft_containstacks(&stack_a, &stack_b, true);
 	normalise(stack_a, stack_is_long(stack_a));
 	container->v_actions = new_action(START);
@@ -101,5 +116,5 @@ int		main(int argc, char **argv)
 	if (container->visualise)
 		return visi(container);
 	else
-		return check_sorted(container);	
+		return check_sorted(container);
 }
