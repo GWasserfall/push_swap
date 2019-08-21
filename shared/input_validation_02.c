@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_validation_02.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 18:33:12 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/21 18:40:23 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
 bool	args_fit_int(int argc, char **argv)
@@ -69,4 +81,11 @@ bool	single_arg_is_valid(int argc, char **argv)
 		return (false);
 	}
 	return (true);
+}
+
+int		duplicate_error(void)
+{
+	ft_putstr(RED "Error : " RESET);
+	ft_putstr("(Duplicates found)\n");
+	return (1);
 }

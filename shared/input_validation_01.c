@@ -6,20 +6,16 @@
 /*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 20:18:27 by gwasserf          #+#    #+#             */
-/*   Updated: 2019/08/16 20:18:29 by gwasserf         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:33:08 by gwasserf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-
 bool	more_than_one_arg(int argc, char **argv)
 {
 	if (argc == 1)
 	{
-		// ft_putstr("Error : ");
-		// ft_putstr(argv[0]);
-		// ft_putstr(" requires atleast one argument\n");
 		return (false);
 	}
 	return (true);
@@ -27,8 +23,9 @@ bool	more_than_one_arg(int argc, char **argv)
 
 bool	valid_flags(int argc, char **argv)
 {
-	int i = 1;
+	int i;
 
+	i = 1;
 	while (i < argc)
 	{
 		if (argv[i][0] == '-' && ft_strlen((const char *)argv[i]) > 1)
@@ -46,7 +43,6 @@ bool	valid_flags(int argc, char **argv)
 			ft_putstr("Error: Invalid option : [-]\n");
 			return (false);
 		}
-		
 		i++;
 	}
 	return (true);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visualiser_helpers_02.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 18:12:44 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/21 18:15:40 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
-void act_reverse(t_stacks **container, enum e_action action)
+void			act_reverse(t_stacks **container, enum e_action action)
 {
 	if (action == PA)
 		pb(container);
@@ -26,14 +38,13 @@ void act_reverse(t_stacks **container, enum e_action action)
 		rr(container);
 }
 
-void reverse_action(t_stacks **container, t_vstate *state)
+void			reverse_action(t_stacks **container, t_vstate *state)
 {
 	t_action *position;
-	position = (*container)->v_actions;
 
+	position = (*container)->v_actions;
 	if (!position->prev)
 		return ;
-
 	if (position)
 	{
 		act_reverse(container, position->action);
@@ -42,7 +53,7 @@ void reverse_action(t_stacks **container, t_vstate *state)
 	wbkgd(state->middlew, COLOR_PAIR(5));
 }
 
-enum e_action get_action(char *str)
+enum e_action	get_action(char *str)
 {
 	if (!(ft_strcmp(str, "sa")))
 		return (SA);
@@ -69,17 +80,18 @@ enum e_action get_action(char *str)
 	return (INVALID);
 }
 
-void collect_actions(t_stacks *container)
+void			collect_actions(t_stacks *container)
 {
-	int ret;
-	char *line;
+	int		ret;
+	char	*line;
+
 	line = malloc(1);
 	while ((ret = get_next_line(0, &line)) > 0)
 		append_new_action(&(container->v_actions), get_action(line));
 	free(line);
 }
 
-void	act_forward(t_stacks **container, t_action *position)
+void			act_forward(t_stacks **container, t_action *position)
 {
 	if (position->action == PA)
 		pa(container);

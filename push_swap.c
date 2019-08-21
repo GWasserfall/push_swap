@@ -6,19 +6,11 @@
 /*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 00:35:59 by gwasserf          #+#    #+#             */
-/*   Updated: 2019/08/17 00:36:03 by gwasserf         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:02:29 by gwasserf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-
-bool	print_usage(char *program)
-{
-	ft_putstr("\n" GRN "Usage:  " RESET);
-	ft_putstr(program);
-	ft_putstr(" 10 9 8 7 6 5 4 3 2 1 0 -1\n\n");
-	return (false);
-}
 
 void	run_algorithm(int count, t_stacks **container)
 {
@@ -56,8 +48,8 @@ int		main(int argc, char **argv)
 		ft_appendelem(&stack_a, atoi(argv[i++]));
 	if ((ft_hasdupe(&stack_a)))
 	{
-		ft_putstr(RED "Error!" RESET "  (Duplicates found)\n");
-		return (print_usage(argv[0]));
+		ft_putstr(RED "Error" RESET " :  (Duplicates found)\n");
+		return (1);
 	}
 	normalise(stack_a, argc - 1);
 	container = ft_containstacks(&stack_a, &stack_b, false);

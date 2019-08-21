@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visualiser_helpers_03.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 18:15:47 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/21 18:19:21 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
-void advance_action(t_stacks **container, t_vstate *state)
+void	advance_action(t_stacks **container, t_vstate *state)
 {
 	t_action *position;
-	position = (*container)->v_actions->next;
 
+	position = (*container)->v_actions->next;
 	if (position)
 	{
 		act_forward(container, position);
@@ -19,7 +31,7 @@ void advance_action(t_stacks **container, t_vstate *state)
 	}
 }
 
-int count_actions(t_action *current)
+int		count_actions(t_action *current)
 {
 	int i;
 
@@ -29,17 +41,17 @@ int count_actions(t_action *current)
 		i++;
 		current = current->prev;
 	}
-	return i;
+	return (i);
 }
 
-void print_actions(WINDOW *win, t_action *position)
+void	print_actions(WINDOW *win, t_action *position)
 {
 	int middle;
 	int moves;
 
 	middle = LINES / 2;
 	werase(win);
-	print_actions_down(win, position->next, middle + 1);;
+	print_actions_down(win, position->next, middle + 1);
 	wattron(win, COLOR_PAIR(4));
 	p_action(win, position->action, middle);
 	wattroff(win, COLOR_PAIR(4));
@@ -49,8 +61,7 @@ void print_actions(WINDOW *win, t_action *position)
 	wrefresh(win);
 }
 
-
-void clear_stacks(WINDOW *left, WINDOW *right)
+void	clear_stacks(WINDOW *left, WINDOW *right)
 {
 	werase(left);
 	werase(right);
@@ -58,7 +69,7 @@ void clear_stacks(WINDOW *left, WINDOW *right)
 	box(right, 0, 0);
 }
 
-void	init_colors()
+void	init_colors(void)
 {
 	start_color();
 	init_pair(2, COLOR_WHITE, COLOR_RED);

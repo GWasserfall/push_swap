@@ -1,12 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visualiser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 18:04:17 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/21 18:10:22 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <ncurses.h>
 #include <time.h>
 #include <push_swap.h>
 
-#define LMID(x) (x / 2 - 8)
-#define RMID(x) (x / 2 + 8)
-#define HEIGHT(x) (x -2 )
-
-t_vstate *initialise()
+t_vstate	*initialise(void)
 {
 	FILE		*f;
 	t_vstate	*state;
@@ -34,25 +42,23 @@ t_vstate *initialise()
 	return (state);
 }
 
-void	initial_draw(t_vstate *state, t_stacks *container)
+void		initial_draw(t_vstate *state, t_stacks *container)
 {
 	mvprintw(0, (COLS / 2 - 10) / 2, "STACK A");
-    mvprintw(0, COLS - ((COLS / 2 - 10) / 2), "STACK B");
+	mvprintw(0, COLS - ((COLS / 2 - 10) / 2), "STACK B");
 	mvprintw(LINES - 1, 0, "[KEY_LEFT] Step Back");
-    mvprintw(LINES - 1, 32, "[KEY_RIGHT] Step Forward");
+	mvprintw(LINES - 1, 32, "[KEY_RIGHT] Step Forward");
 	mvprintw(LINES - 1, 68, "[ENTER] Run From Here");
 	if (state->interactive)
 		mvprintw(LINES - 1, 99, "[a] Append Action");
-
 	mvprintw(LINES - 1, COLS - 20, "[q] Exit");
 	refresh();
-
 	print_actions(state->middlew, container->v_actions);
 	draw_stackw(state->leftw, *(container->a), TRUE);
-	draw_stackw(state->rightw, *(container->b), FALSE);	
+	draw_stackw(state->rightw, *(container->b), FALSE);
 }
 
-bool is_valid_move(t_stacks *con, enum e_action a)
+bool		is_valid_move(t_stacks *con, enum e_action a)
 {
 	int alen;
 	int blen;
@@ -62,43 +68,23 @@ bool is_valid_move(t_stacks *con, enum e_action a)
 	if (a != INVALID)
 	{
 		if (a == PA && blen == 0)
-			return false;
+			return (false);
 		if (a == PB && alen == 0)
-			return false;
+			return (false);
 		if ((a == RA || a == RR || a == RRA || a == RRR) && alen < 2)
-			return false;
+			return (false);
 		if ((a == RB || a == RR || a == RRB || a == RRR) && blen < 2)
-			return false;
+			return (false);
 		if ((a == SA || a == SS) && alen < 2)
-			return false;
+			return (false);
 		if ((a == SB || a == SS) && blen < 2)
-			return false;
-		return true;
+			return (false);
+		return (true);
 	}
-	return false;
+	return (false);
 }
 
-
-void user_input(t_stacks *con, t_vstate *state, char **act)
-{
-	bool valid;
-
-	valid = true;
-	echo();
-	curs_set(1);
-	mvwprintw(state->middlew, 1, 4, ": ");
-	wgetstr(state->middlew, *act);
-	valid = is_valid_move(con, get_action(*act));
-	if (valid)
-	{
-		append_new_action(&(con->v_actions), get_action(*act));
-		advance_action(&con, state);
-	}
-	noecho();
-	curs_set(0);
-}
-
-void	advance_to_end(t_vstate *state, t_stacks *container)
+void		advance_to_end(t_vstate *state, t_stacks *container)
 {
 	while (container->v_actions->next)
 	{
@@ -106,16 +92,16 @@ void	advance_to_end(t_vstate *state, t_stacks *container)
 		advance_action(&container, state);
 		clear_stacks(state->leftw, state->rightw);
 		print_actions(state->middlew, container->v_actions);
-		draw_stackw(state->leftw, *(container->a), TRUE);
-		draw_stackw(state->rightw, *(container->b), FALSE);
+		draw_stackw(state->leftw, *(container->a), true);
+		draw_stackw(state->rightw, *(container->b), false);
 		refresh();
 	}
 }
 
-int visi(t_stacks *container)
+int			visi(t_stacks *container)
 {
-	t_vstate *state;
-	char *act;
+	t_vstate	*state;
+	char		*act;
 
 	state = initialise();
 	if (!state->interactive)
@@ -124,8 +110,8 @@ int visi(t_stacks *container)
 	if (!(act = malloc(5)))
 		return (1);
 	animation_loop(state, container, &act);
-    delwin(state->leftw);
+	delwin(state->leftw);
 	delwin(state->rightw);
-    endwin();
-    return 0;
+	endwin();
+	return (0);
 }

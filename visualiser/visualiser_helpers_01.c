@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visualiser_helpers_01.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 18:19:25 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/21 18:20:52 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 #include <ncurses.h>
 
-void p_action(WINDOW *win, enum e_action action, int row)
+void	p_action(WINDOW *win, enum e_action action, int row)
 {
 	if (action == PA)
 		mvwprintw(win, row, 6, " pa ");
@@ -29,7 +41,7 @@ void p_action(WINDOW *win, enum e_action action, int row)
 		mvwprintw(win, row, 5, " START ");
 }
 
-void print_actions_down(WINDOW *win, t_action *action, int pos)
+void	print_actions_down(WINDOW *win, t_action *action, int pos)
 {
 	while (action && pos < (LINES - 3))
 	{
@@ -38,7 +50,7 @@ void print_actions_down(WINDOW *win, t_action *action, int pos)
 	}
 }
 
-void print_actions_up(WINDOW *win, t_action *action, int pos)
+void	print_actions_up(WINDOW *win, t_action *action, int pos)
 {
 	while (action && pos > 2)
 	{
@@ -73,7 +85,6 @@ void	wprint_row(WINDOW *win, t_stack *current, int row, int dir)
 	mvwprintw(win, row, i + 1, "[%.2d]", current->index);
 }
 
-
 void	draw_stackw(WINDOW *window, t_stack *stack, int dir)
 {
 	int row;
@@ -86,5 +97,5 @@ void	draw_stackw(WINDOW *window, t_stack *stack, int dir)
 		row++;
 		stack = stack->next;
 	}
-    wrefresh(window);
+	wrefresh(window);
 }

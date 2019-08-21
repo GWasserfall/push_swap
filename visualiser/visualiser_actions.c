@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visualiser_actions.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 18:21:09 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/21 18:21:47 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
 t_action	*new_action(enum e_action action)
@@ -12,7 +24,7 @@ t_action	*new_action(enum e_action action)
 	return (new);
 }
 
-void	append_new_action(t_action **previous, enum e_action a)
+void		append_new_action(t_action **previous, enum e_action a)
 {
 	t_action *cursor;
 	t_action *this;
@@ -25,7 +37,7 @@ void	append_new_action(t_action **previous, enum e_action a)
 	this->prev = cursor;
 }
 
-int	actions_length(t_action *start)
+int			actions_length(t_action *start)
 {
 	int i;
 
@@ -35,5 +47,5 @@ int	actions_length(t_action *start)
 		i++;
 		start = start->next;
 	}
-	return i;
+	return (i);
 }

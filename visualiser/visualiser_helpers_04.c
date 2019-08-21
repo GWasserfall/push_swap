@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_helpers_01.c                             :+:      :+:    :+:   */
+/*   cisualiser_helpers_04.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/17 00:35:44 by gwasserf          #+#    #+#             */
-/*   Updated: 2019/08/21 18:03:36 by gwasserf         ###   ########.fr       */
+/*   Created: 2019/08/21 18:22:40 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/21 18:22:54 by gwasserf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	destroy_stack(t_stack *head)
+void	user_input(t_stacks *con, t_vstate *state, char **act)
 {
-	if (head->next)
-		destroy_stack(head->next);
-	free(head);
-}
+	bool valid;
 
-int		cleanup(t_stacks *container)
-{
-	destroy_stack(*(container->a));
-	destroy_stack(*(container->b));
-	free(container);
-	return (0);
+	valid = true;
+	echo();
+	curs_set(1);
+	mvwprintw(state->middlew, 1, 4, ": ");
+	wgetstr(state->middlew, *act);
+	valid = is_valid_move(con, get_action(*act));
+	if (valid)
+	{
+		append_new_action(&(con->v_actions), get_action(*act));
+		advance_action(&con, state);
+	}
+	noecho();
+	curs_set(0);
 }

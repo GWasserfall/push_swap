@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   random.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 17:53:31 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/21 17:55:31 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <libft.h>
 
-void print_array(int *arr, int size)
+void	print_array(int *arr, int size)
 {
 	int j;
 
@@ -18,7 +30,7 @@ void print_array(int *arr, int size)
 	write(1, "\n", 1);
 }
 
-int	is_unique(int suggested, int *array, int size)
+int		is_unique(int suggested, int *array, int size)
 {
 	int i;
 
@@ -32,7 +44,7 @@ int	is_unique(int suggested, int *array, int size)
 	return (1);
 }
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	int *array;
 	int current;
@@ -57,6 +69,6 @@ int main(int ac, char **av)
 		print_array(array, max);
 	}
 	else
-		write(1, "How many numbers should we generate? Huh? ./randint {int:count}\n", 64);
-   return 0;
+		write(1, "Usage: ./randint 100\n", 64);
+	return (0);
 }
