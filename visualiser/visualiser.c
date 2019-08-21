@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <time.h>
 #include <push_swap.h>
 
 #define LMID(x) (x / 2 - 8)
@@ -73,7 +74,7 @@ void	act_forward(t_stacks **container, t_action *position)
 		rrr(container);
 }
 
-void advance_action(t_stacks **container)
+void advance_action(t_stacks **container, t_vstate *state)
 {
 	t_action *position;
 	position = (*container)->v_actions->next;
@@ -82,6 +83,13 @@ void advance_action(t_stacks **container)
 	{
 		act_forward(container, position);
 		(*container)->v_actions = position;
+	}
+	if (position && !position->next)
+	{
+		if (ft_sorted((*container)->a, (*container)->b))
+			wbkgd(state->middlew, COLOR_PAIR(3));
+		else
+			wbkgd(state->middlew, COLOR_PAIR(2));
 	}
 }
 
@@ -124,8 +132,14 @@ void clear_stacks(WINDOW *left, WINDOW *right)
 	box(right, 0, 0);
 }
 
-
-
+void	init_colors()
+{
+	start_color();
+	init_pair(2, COLOR_WHITE, COLOR_RED);
+	init_pair(3, COLOR_BLACK, COLOR_GREEN);
+	init_pair(4, COLOR_BLACK, COLOR_WHITE);
+	init_pair(5, COLOR_WHITE, COLOR_BLACK);
+}
 
 t_vstate *initialise()
 {
@@ -140,15 +154,10 @@ t_vstate *initialise()
 		f = fopen("/dev/tty", "r+");
 		state->screen = newterm(NULL, f, f);
 	}
-	elseasd
-	{
+	else
 		state->screen = newterm(NULL, stderr, stdin);
-	}
 	set_term(state->screen);
-	start_color();
-	init_pair(2, COLOR_WHITE, COLOR_RED);
-	init_pair(3, COLOR_BLACK, COLOR_GREEN);
-	init_pair(4, COLOR_BLACK, COLOR_WHITE);
+	init_colors();
 	curs_set(0);
 	noecho();
 	state->rightw = newwin(HEIGHT(LINES), (COLS / 2 - 8), 1, RMID(COLS));
@@ -164,6 +173,13 @@ void	initial_draw(t_vstate *state, t_stacks *container)
 {
 	mvprintw(0, (COLS / 2 - 10) / 2, "STACK A");
     mvprintw(0, COLS - ((COLS / 2 - 10) / 2), "STACK B");
+	mvprintw(LINES - 1, 0, "[KEY_LEFT] Step Back");
+    mvprintw(LINES - 1, 32, "[KEY_RIGHT] Step Forward");
+	mvprintw(LINES - 1, 68, "[ENTER] Run From Here");
+	if (state->interactive)
+		mvprintw(LINES - 1, 99, "[a] Append Action");
+
+	mvprintw(LINES - 1, COLS - 20, "[q] Exit");
 	refresh();
 
 	print_actions(state->middlew, container->v_actions);
@@ -171,6 +187,65 @@ void	initial_draw(t_vstate *state, t_stacks *container)
 	draw_stackw(state->rightw, *(container->b), FALSE);	
 }
 
+bool is_valid_move(t_stacks *con, enum e_action a)
+{
+	int alen;
+	int blen;
+
+	alen = stack_is_long(*(con->a));
+	blen = stack_is_long(*(con->b));
+	if (a != INVALID)
+	{
+		if (a == PA && blen == 0)
+			return false;
+		if (a == PB && alen == 0)
+			return false;
+		if ((a == RA || a == RR || a == RRA || a == RRR) && alen < 2)
+			return false;
+		if ((a == RB || a == RR || a == RRB || a == RRR) && blen < 2)
+			return false;
+		if ((a == SA || a == SS) && alen < 2)
+			return false;
+		if ((a == SB || a == SS) && blen < 2)
+			return false;
+		return true;
+	}
+	return false;
+}
+
+
+void user_input(t_stacks *con, t_vstate *state, char **act)
+{
+	bool valid;
+
+	valid = true;
+	echo();
+	curs_set(1);
+	mvwprintw(state->middlew, 1, 4, ": ");
+	wgetstr(state->middlew, *act);
+	valid = is_valid_move(con, get_action(*act));
+	if (valid)
+	{
+		append_new_action(&(con->v_actions), get_action(*act));
+		advance_action(&con, state);
+	}
+	noecho();
+	curs_set(0);
+}
+
+void	advance_to_end(t_vstate *state, t_stacks *container)
+{
+	while (container->v_actions->next)
+	{
+		usleep(50000);
+		advance_action(&container, state);
+		clear_stacks(state->leftw, state->rightw);
+		print_actions(state->middlew, container->v_actions);
+		draw_stackw(state->leftw, *(container->a), TRUE);
+		draw_stackw(state->rightw, *(container->b), FALSE);
+		refresh();
+	}
+}
 
 void animation_loop(t_vstate *state, t_stacks *container, char **act)
 {
@@ -178,22 +253,15 @@ void animation_loop(t_vstate *state, t_stacks *container, char **act)
 	{
 		state->input = wgetch(stdscr);
 		if (state->input == KEY_LEFT)
-			reverse_action(&container);
+			reverse_action(&container, state);
 		else if (state->input == KEY_RIGHT)
-			advance_action(&container);
+			advance_action(&container, state);
 		else if (state->input == 'q')
 			break;
+		else if (state->input == 10)
+			advance_to_end(state, container);
 		else if (state->input == 'a' && state->interactive)
-		{
-			echo();
-			curs_set(1);
-			mvwprintw(state->middlew, 1, 4, ": ");
-			wgetstr(state->middlew, *act);
-			append_new_action(&(container->v_actions), get_action(*act));
-			advance_action(&container);
-			noecho();
-			curs_set(0);
-		}
+			user_input(container, state, act);
 		clear_stacks(state->leftw, state->rightw);
 		print_actions(state->middlew, container->v_actions);
 		draw_stackw(state->leftw, *(container->a), TRUE);
@@ -208,7 +276,7 @@ int visi(t_stacks *container)
 	char *act;
 
 	state = initialise();
-	if (!state->tty)
+	if (!state->interactive)
 		collect_actions(container);
 	initial_draw(state, container);
 	if (!(act = malloc(5)))

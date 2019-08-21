@@ -116,7 +116,7 @@ void				print_actions_up(WINDOW *win, t_action *action, int pos);
 void				push_back_to_a(t_stacks **container);
 void				ra(t_stacks **stacks);
 void				rb(t_stacks **stacks);
-void				reverse_action(t_stacks **container);
+void				reverse_action(t_stacks **container, t_vstate *state);
 void				rr(t_stacks **stacks);
 void				rra(t_stacks **stacks);
 void				rrb(t_stacks **stacks);

@@ -1,4 +1,5 @@
-FLAGS = -Wall -Werror -Wextra -g
+//FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -g
 
 all: depend random push_swap checker
 

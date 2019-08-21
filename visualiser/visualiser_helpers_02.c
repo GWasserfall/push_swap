@@ -26,7 +26,7 @@ void act_reverse(t_stacks **container, enum e_action action)
 		rr(container);
 }
 
-void reverse_action(t_stacks **container)
+void reverse_action(t_stacks **container, t_vstate *state)
 {
 	t_action *position;
 	position = (*container)->v_actions;
@@ -37,9 +37,9 @@ void reverse_action(t_stacks **container)
 	if (position)
 	{
 		act_reverse(container, position->action);
-		
 		(*container)->v_actions = position->prev;
 	}
+	wbkgd(state->middlew, COLOR_PAIR(5));
 }
 
 enum e_action get_action(char *str)

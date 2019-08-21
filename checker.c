@@ -38,7 +38,6 @@ void	ft_runactions(t_stacks **container)
 	while ((ret = get_next_line(0, &line)) > 0)
 	{	if (!(ft_act(container, line)))
 		{
-			return ;
 			free(line);
 		}
 	}
@@ -63,7 +62,7 @@ int		check_sorted(t_stacks *container)
 	t_stack		*stack_b;
 
 	stack_a = *(container->a);
-	stack_b = *(container->a);
+	stack_b = *(container->b);
 	
 	ft_runactions(&container);
 	if (ft_sorted(&stack_a, &stack_b))
