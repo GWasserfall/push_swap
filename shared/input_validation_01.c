@@ -12,7 +12,7 @@
 
 #include <push_swap.h>
 
-bool	more_than_one_arg(int argc, char **argv)
+bool	more_than_one_arg(int argc)
 {
 	if (argc == 1)
 	{
@@ -50,7 +50,7 @@ bool	valid_flags(int argc, char **argv)
 
 bool	checker_preflight(int argc, char **argv)
 {
-	if (!(more_than_one_arg(argc, argv)))
+	if (!(more_than_one_arg(argc)))
 		return (false);
 	if (argc == 2 && !single_arg_is_valid(argc, argv))
 		return (false);
@@ -65,7 +65,7 @@ bool	checker_preflight(int argc, char **argv)
 
 bool	pushswap_preflight(int argc, char **argv)
 {
-	if (!(more_than_one_arg(argc, argv)))
+	if (!(more_than_one_arg(argc)))
 		return (false);
 	if (argc == 2 && !single_arg_is_valid(argc, argv))
 		return (false);
