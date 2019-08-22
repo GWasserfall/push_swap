@@ -6,7 +6,7 @@
 /*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 20:25:58 by gwasserf          #+#    #+#             */
-/*   Updated: 2019/08/16 20:25:59 by gwasserf         ###   ########.fr       */
+/*   Updated: 2019/08/22 15:35:32 by gwasserf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,18 @@ long	ft_atol(char *string)
 			result *= 10;
 	}
 	return (result * negative);
+}
+
+int		stack_is_long(t_stack *stack)
+{
+	int count;
+
+	count = 0;
+	stack = stack->next;
+	while (stack)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
 }

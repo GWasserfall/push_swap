@@ -6,13 +6,13 @@
 /*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 18:50:04 by gwasserf          #+#    #+#             */
-/*   Updated: 2019/08/21 19:08:25 by gwasserf         ###   ########.fr       */
+/*   Updated: 2019/08/22 13:34:00 by gwasserf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	get_value_at_indexb(t_stack **stack, int index)
+int		get_value_at_indexb(t_stack **stack, int index)
 {
 	t_stack	*cursor;
 	int		i;
@@ -31,13 +31,13 @@ int	get_value_at_indexb(t_stack **stack, int index)
 	return (-1);
 }
 
-void ft_sort_three_b(t_stacks **container)
+void	ft_sort_three_b(t_stacks **container)
 {
 	t_stack	*b;
 	int		one;
 	int		two;
 	int		thr;
-	
+
 	b = *(*container)->b;
 	while (!(ft_single_sorted(b)))
 	{

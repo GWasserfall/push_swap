@@ -6,39 +6,15 @@
 /*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 17:21:41 by gwasserf          #+#    #+#             */
-/*   Updated: 2019/08/15 17:21:42 by gwasserf         ###   ########.fr       */
+/*   Updated: 2019/08/22 15:34:41 by gwasserf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-
-
-
-int b_not_sorted(t_stacks **container)
+int		move_count(t_stack *stack, int norm)
 {
-	t_stack *b = (*(*container)->b);
-	int min = min_index(b);
-
-	b = b->next;
-	while (b)
-	{	
-		if (b->next)
-		{
-			if ((b->index < b->next->index) && b->index != min)
-				return (1);
-		}
-		b = b->next;
-	}
-	return 0;
-}
-
-
-int move_count(t_stack *stack, int norm)
-{
-	t_stack *starts;
 	int count;
-	//int start;
 	int next;
 	int len;
 	int max;
@@ -48,79 +24,65 @@ int move_count(t_stack *stack, int norm)
 	len = stack_is_long(stack);
 	max = max_index(stack);
 	min = min_index(stack);
-	starts = stack->next;
 	next = closest_lower_index(stack, norm);
 	stack = stack->next;
-	// if (norm > max && start == max) TODO
-	// 	return (0);
 	if (norm < min)
 		next = max;
 	while (stack)
 	{
 		if (stack->index == next)
-			break;
+			break ;
 		count++;
 		stack = stack->next;
 	}
 	if (count > len / 2)
-		return count - len;
+		return (count - len);
 	else
-		return count;
+		return (count);
+}
+
+void	calc_moves(t_moves **move, int *am, int *bm, int *total)
+{
+	t_moves	*m;
+
+	m = *move;
+	*am = (m->pos > m->lena / 2) ? m->pos - m->lena : m->pos;
+	if (*bm > m->lenb / 2)
+		*bm = *bm - m->lenb;
+	if (*bm == *am)
+		*total = (*bm > 0) ? *bm : *bm * -1;
+	else if (*am > 0 && *bm > 0)
+		*total = (*am > *bm ? *am : *bm);
+	else if (*am < 0 && *bm < 0)
+		*total = (*am < *bm) ? *am * -1 : *bm * -1;
+	else
+		*total = (*am - *bm > 0) ? *am - *bm : (*am - *bm) * -1;
 }
 
 void	best_move(t_moves **move, t_stack *a, t_stack *b)
 {
-	t_moves *m;
-	int position;
-	int len;
-	int lenb;
-	int amoves;
-	int bmoves;
-	int total;
+	t_moves	*m;
+	int		amoves;
+	int		bmoves;
+	int		total;
 
-	int big;
-
-	big = max_index(a);
-
-
-	len = stack_is_long(a);
-	lenb = stack_is_long(b);
 	m = *move;
+	init_moves(move, a, b);
 	a = a->next;
-
-	m->total = INT_MAX;
-
-	position = 0;	
 	while (a)
 	{
-		amoves = (position > len / 2) ? position - len : position;
 		bmoves = move_count(b, a->index);
-		if (bmoves > lenb / 2)
-			bmoves = bmoves - lenb;
-		if (bmoves == amoves)
-			total = (bmoves > 0) ? bmoves : bmoves * -1;
-		else if (amoves > 0 && bmoves > 0)
-			total = (amoves > bmoves ? amoves : bmoves);
-		else if (amoves < 0 && bmoves < 0)
-			total = (amoves < bmoves) ? amoves * -1 : bmoves * -1;
-		else
-			total = (amoves - bmoves > 0) ? amoves - bmoves : (amoves - bmoves) * -1;
-		
-		if (a->index > big - 3)
+		calc_moves(move, &amoves, &bmoves, &total);
+		if (a->index > m->maxa - 3)
 			total += 200;
-
 		if (total < m->total)
-		{
-			m->a_moves = amoves;
-			m->b_moves = bmoves;
-			m->total = total;
-		}
-		position++;
+			set_best_move(move, amoves, bmoves, total);
+		m->pos++;
 		a = a->next;
 	}
 }
 
-void gsort(t_stacks **container, t_moves **moves, int a_max)
+void	gsort(t_stacks **container, t_moves **moves, int a_max)
 {
 	t_stack	*a;
 	t_stack	*b;

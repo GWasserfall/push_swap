@@ -12,7 +12,7 @@ push_swap:
 	@echo "\033[4;32m== push_swap compiled ==\033[0m"
 
 checker:
-	$(CC) $(FLAGS) ./visualiser/*.c ./checker.c ./shared/*.c ./algorithms/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o checker
+	$(CC) $(FLAGS) ./visualiser/*.c ./checker.c ./shared/*.c ./libft/libft.a -I./includes -I./libft -lncurses -o checker
 	@echo "\033[4;32m== checker compiled   ==\033[0m"
 
 random:

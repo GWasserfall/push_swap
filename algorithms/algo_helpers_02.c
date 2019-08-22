@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_helpers_02.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/22 13:42:02 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/22 13:43:45 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
-int len_to_end(t_stack *head, t_stack *item)
+int		len_to_end(t_stack *head, t_stack *item)
 {
 	int i;
 
 	i = 0;
 	while (head != item)
 		head = head->next;
-
 	while (item)
 	{
 		i++;
@@ -16,7 +27,7 @@ int len_to_end(t_stack *head, t_stack *item)
 	return (i);
 }
 
-int len_from_start(t_stack *head, t_stack *item)
+int		len_from_start(t_stack *head, t_stack *item)
 {
 	int i;
 
@@ -24,21 +35,21 @@ int len_from_start(t_stack *head, t_stack *item)
 	while (head->next)
 	{
 		if (head->next == item)
-			return i;
+			return (i);
 		i++;
 		head = head->next;
 	}
-	return i;
+	return (i);
 }
 
-int end_index(t_stack *stack)
+int		end_index(t_stack *stack)
 {
 	while (stack->next)
 		stack = stack->next;
 	return (stack->index);
 }
 
-int closest_lower_index(t_stack *stack, int index)
+int		closest_lower_index(t_stack *stack, int index)
 {
 	int i;
 
@@ -50,10 +61,10 @@ int closest_lower_index(t_stack *stack, int index)
 			i = stack->index;
 		stack = stack->next;
 	}
-	return i;
+	return (i);
 }
 
-void ft_reversesort_three(t_stacks **container, t_stack *stack)
+void	ft_reversesort_three(t_stacks **container, t_stack *stack)
 {
 	int a;
 	int b;
@@ -63,7 +74,6 @@ void ft_reversesort_three(t_stacks **container, t_stack *stack)
 	a = stack->index;
 	b = stack->next->index;
 	c = stack->next->next->index;
-
 	if (a < b && b < c && c > a)
 	{
 		rb(container);

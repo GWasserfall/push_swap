@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_helpers_03.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/22 13:43:51 by gwasserf          #+#    #+#             */
+/*   Updated: 2019/08/22 13:45:27 by gwasserf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
-void ft_rotate_a(t_stacks **container, t_moves **moves)
+void	ft_rotate_a(t_stacks **container, t_moves **moves)
 {
 	if ((*moves)->a_moves > 0)
 	{
@@ -14,9 +26,9 @@ void ft_rotate_a(t_stacks **container, t_moves **moves)
 	}
 }
 
-void ft_dblrotate(t_stacks **container, t_moves **moves, int direction)
+void	ft_dblrotate(t_stacks **container, t_moves **moves, int direction)
 {
-	if (direction  > 0)
+	if (direction > 0)
 	{
 		rr(container);
 		(*moves)->a_moves--;
@@ -30,7 +42,7 @@ void ft_dblrotate(t_stacks **container, t_moves **moves, int direction)
 	}
 }
 
-void ft_rotate_b(t_stacks **container, t_moves **moves)
+void	ft_rotate_b(t_stacks **container, t_moves **moves)
 {
 	if ((*moves)->b_moves > 0)
 	{
@@ -44,11 +56,10 @@ void ft_rotate_b(t_stacks **container, t_moves **moves)
 	}
 }
 
-
-void ft_initial_push(t_stacks **container, int max)
+void	ft_initial_push(t_stacks **container, int max)
 {
-	int count;
-	t_stack *a;
+	int		count;
+	t_stack	*a;
 
 	a = (*(*container)->a);
 	count = 0;

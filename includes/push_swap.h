@@ -76,6 +76,10 @@ typedef struct		s_moves
 	int				a_moves;
 	int				b_moves;
 	int				total;
+	int				lenb;
+	int				lena;
+	int				maxa;
+	int				pos;
 }					t_moves;
 
 typedef struct		s_vstate
@@ -171,5 +175,8 @@ void				user_input(t_stacks *con, t_vstate *state, char **act);
 void				wprint_row(WINDOW *win, t_stack *current, int row, int dir);
 int					duplicate_error(void);
 bool				is_valid_move(t_stacks *con, enum e_action a);
+int					b_not_sorted(t_stacks **container);
+void				init_moves(t_moves **move, t_stack *a, t_stack *b);
+void				set_best_move(t_moves **move, int a, int b, int t);
 
 #endif
