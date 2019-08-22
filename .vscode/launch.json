@@ -22,7 +22,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/checker",
-			"args": ["0", "9", "1", "8", "2", "7", "3", "6", "4", "-v"],
+			"args": ["0", "123", "123", "-20"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"preLaunchTask": "build",

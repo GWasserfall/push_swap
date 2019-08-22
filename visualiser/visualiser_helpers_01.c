@@ -82,7 +82,7 @@ void	wprint_row(WINDOW *win, t_stack *current, int row, int dir)
 		mvwprintw(win, row, i++, " ");
 	wattroff(win, COLOR_PAIR(3));
 	wattroff(win, COLOR_PAIR(2));
-	mvwprintw(win, row, i + 1, "[%.2d]", current->index);
+	mvwprintw(win, row, i + 1, "[%d]", current->value);
 }
 
 void	draw_stackw(WINDOW *window, t_stack *stack, int dir)

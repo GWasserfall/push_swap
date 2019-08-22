@@ -6,7 +6,7 @@
 /*   By: gwasserf <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:55:59 by gwasserf          #+#    #+#             */
-/*   Updated: 2019/08/21 17:59:57 by gwasserf         ###   ########.fr       */
+/*   Updated: 2019/08/22 15:55:18 by gwasserf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ bool	ft_runactions(t_stacks **container)
 	char	*line;
 	int		ret;
 
-	line = ft_strnew(0);
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
 		if (!(ft_act(container, line)))
@@ -57,6 +56,7 @@ bool	ft_runactions(t_stacks **container)
 			free(line);
 			return (false);
 		}
+		free(line);
 	}
 	return (true);
 }
@@ -109,8 +109,9 @@ int		main(int argc, char **argv)
 	stack_b = ft_stackinit();
 	while (++i < argc)
 	{
-		if (argv[i][0] != '-')
-			ft_appendelem(&stack_a, ft_atoi(argv[i]));
+		if (argv[i][0] == '-' && argv[i][1] == 'v')
+			continue;
+		ft_appendelem(&stack_a, ft_atoi(argv[i]));
 	}
 	if (ft_hasdupe(&stack_a))
 		return (duplicate_error());
@@ -118,8 +119,5 @@ int		main(int argc, char **argv)
 	normalise(stack_a, stack_is_long(stack_a));
 	container->v_actions = new_action(START);
 	collect_options(argc, argv, container);
-	if (container->visualise)
-		return (visi(container));
-	else
-		return (check_sorted(container));
+	return (container->visualise) ? visi(container) : check_sorted(container);
 }

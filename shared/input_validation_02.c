@@ -41,6 +41,14 @@ bool	args_fit_int(int argc, char **argv)
 	return (true);
 }
 
+void	print_digit_error(char c)
+{
+	ft_putstr(RED "Error" RESET " : (Non-digit ");
+	ft_putstr("found in arguments [");
+	ft_putchar(c);
+	ft_putstr("])\n");
+}
+
 bool	args_are_digits(int argc, char **argv)
 {
 	int i;
@@ -52,14 +60,13 @@ bool	args_are_digits(int argc, char **argv)
 		j = 0;
 		while (i < argc && argv[i][j])
 		{
-			if (argv[i][0] == '-' && !(ft_isdigit(argv[i++][1])))
-				continue;
+			if (argv[i][0] == '-' && argv[i][1] == 'v')
+				break ;
+			if (j == 0 && argv[i][j] == '-')
+				j++;
 			if (!(ft_isdigit(argv[i][j])))
 			{
-				ft_putstr(RED "Error" RESET " : (Non-digit ");
-				ft_putstr("found in arguments [");
-				ft_putchar(argv[i][j]);
-				ft_putstr("])\n");
+				print_digit_error(argv[i][j]);
 				return (false);
 			}
 			j++;
@@ -79,6 +86,11 @@ bool	single_arg_is_valid(int argc, char **argv)
 		ft_putstr(" is not a digit.");
 		ft_putstr(" If you are using zsh please expand args using ${=ARG}\n");
 		return (false);
+	}
+	if (argc == 2)
+	{
+		if (!argv[1][0])
+			return (false);
 	}
 	return (true);
 }

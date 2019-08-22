@@ -30,7 +30,7 @@ bool	valid_flags(int argc, char **argv)
 	{
 		if (argv[i][0] == '-' && ft_strlen((const char *)argv[i]) > 1)
 		{
-			if (argv[i][1] != 'v')
+			if (!ft_isdigit(argv[i][1]) && argv[i][1] != 'v')
 			{
 				ft_putstr("Error: Invalid option : [");
 				ft_putchar(argv[i][1]);
@@ -38,7 +38,7 @@ bool	valid_flags(int argc, char **argv)
 				return (false);
 			}
 		}
-		if (argv[i][0] == '-' && ft_strlen((const char *)argv[i]) == 1)
+		else if (argv[i][0] == '-' && ft_strlen((const char *)argv[i]) == 1)
 		{
 			ft_putstr("Error: Invalid option : [-]\n");
 			return (false);
