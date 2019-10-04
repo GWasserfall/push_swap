@@ -10,4 +10,4 @@ yada yada need a better way to explain this
 ## Visualiser
 I created a visualiser using the C ncurses library to draw both stacks to the screen. The stack positions can be moved forward and backward using the arrow keys on the keyboard, or solved from the current position using the enter key
 
-{{ giff_here }}
+![visu](https://raw.githubusercontent.com/gwasserfall/push_swap/master/visualiser.png?token=AEF2RWH5CHGFM42INQIVRWK5S6ISE)
